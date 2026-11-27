@@ -547,6 +547,8 @@
   }
   .to-top.show{opacity:1;pointer-events:auto;transform:translateY(0);}
   .to-top:hover{background:var(--blue-bright);}
+  .to-top.on-dark{background:#fff;color:var(--navy-fixed);}
+  .to-top.on-dark:hover{background:var(--sky);}
 
   .faq-shortcut{
     position:fixed;
@@ -562,6 +564,8 @@
     z-index:46;
   }
   .faq-shortcut:hover{background:var(--blue-bright);}
+  .faq-shortcut.on-dark{background:#fff;color:var(--navy-fixed);}
+  .faq-shortcut.on-dark:hover{background:var(--sky);}
 
   .toast{
     position:fixed;
@@ -1268,11 +1272,30 @@
   // header shadow + back-to-top, batched on rAF to stay smooth while scrolling
   var header = document.querySelector('header');
   var toTop = document.getElementById('toTop');
+  var faqShortcut = document.getElementById('faqShortcut');
   var ticking = false;
+
+  // the two floating buttons are always navy-on-navy over the page's own
+  // dark blocks (footer, zone card, the quote-form card, the navy "why us"
+  // card), which makes their circle vanish and leaves just a stray icon —
+  // so whichever one of those blocks is behind a button each flips it to a
+  // light circle with a navy icon instead.
+  var darkZones = Array.prototype.slice.call(document.querySelectorAll('footer, .zone-card, .cta-block, .why-visual'));
+  function sitsOnDarkZone(btn){
+    var r = btn.getBoundingClientRect();
+    var px = r.left + r.width / 2, py = r.top + r.height / 2;
+    for (var i = 0; i < darkZones.length; i++){
+      var dr = darkZones[i].getBoundingClientRect();
+      if (px >= dr.left && px <= dr.right && py >= dr.top && py <= dr.bottom) return true;
+    }
+    return false;
+  }
   function onScroll(){
     var y = window.scrollY || document.documentElement.scrollTop;
     header.classList.toggle('scrolled', y > 8);
     toTop.classList.toggle('show', y > 480);
+    toTop.classList.toggle('on-dark', sitsOnDarkZone(toTop));
+    faqShortcut.classList.toggle('on-dark', sitsOnDarkZone(faqShortcut));
     ticking = false;
   }
   window.addEventListener('scroll', function(){
