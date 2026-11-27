@@ -534,7 +534,7 @@
   .to-top{
     position:fixed;
     right:max(20px, env(safe-area-inset-right, 0px));
-    bottom:max(20px, env(safe-area-inset-bottom, 0px));
+    bottom:calc(max(20px, env(safe-area-inset-bottom, 0px)) + 60px);
     width:46px;height:46px;border-radius:50%;
     background:var(--navy-fixed);color:#fff;border:none;
     display:flex;align-items:center;justify-content:center;
@@ -551,7 +551,7 @@
   .faq-shortcut{
     position:fixed;
     right:max(20px, env(safe-area-inset-right, 0px));
-    bottom:calc(max(20px, env(safe-area-inset-bottom, 0px)) + 60px);
+    bottom:max(20px, env(safe-area-inset-bottom, 0px));
     width:46px;height:46px;border-radius:50%;
     background:var(--navy-fixed);color:#fff;
     display:flex;align-items:center;justify-content:center;
