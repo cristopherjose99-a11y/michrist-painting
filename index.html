@@ -1,9 +1,10 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="light"><meta name="supported-color-schemes" content="light"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html style=""><head><meta charset="utf8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style>artifact-sync,artifact-local{display:contents}</style><style>artifact-sync,artifact-local{display:contents}</style></head><body class="">
+<meta charset="utf8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="light"><meta name="supported-color-schemes" content="light"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
 <title>Michrist Painting</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 <style>
   /*
     Layout: a single scrolling page. Diagonal "roller stroke" wave dividers
@@ -683,6 +684,15 @@
   .color-row:last-of-type{border-bottom:none;}
   .color-row label{font-size:.85rem;color:var(--ink);flex:1;}
   .color-row input[type="color"]{width:42px;height:32px;border:1px solid var(--line);border-radius:8px;padding:2px;cursor:pointer;background:none;flex:none;}
+  .color-hex{
+    width:84px;flex:none;
+    border:1px solid var(--line);border-radius:8px;
+    padding:6px 8px;
+    font-family:var(--font-body);font-size:.82rem;
+    color:var(--ink);
+    text-transform:lowercase;
+  }
+  .color-hex:focus{outline:2px solid var(--blue-bright);outline-offset:1px;}
   .add-photo-btn{
     display:none;
     flex-direction:column;align-items:center;justify-content:center;gap:8px;
@@ -702,7 +712,7 @@
   }
 </style>
 
-<header>
+<header class="">
   <div class="wrap nav">
     <a class="brand" href="#inicio">
       <img id="img-logo-header" data-editable="image" src="logo-header-blue.png" alt="Michrist Painting">
@@ -719,8 +729,8 @@
     </ul>
     <a class="btn btn-primary btn-sm" href="#quoteForm" id="nav-cta" data-editable="text">Pide tu presupuesto</a>
     <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú">
-      <svg class="icon-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      <svg class="icon-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+      <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg>
     </button>
   </div>
 </header>
@@ -732,7 +742,7 @@
         <p class="eyebrow" id="hero-eyebrow" data-editable="text">Pintura profesional en Barcelona</p>
         <h1 id="hero-title" data-editable="text">Dale a tu hogar el acabado que se merece</h1>
         <svg class="brush-stroke" viewBox="0 0 220 20" width="170" height="16" aria-hidden="true">
-          <path d="M4 14 C 40 2, 80 20, 120 8 S 200 2, 216 10"/>
+          <path d="M4 14 C 40 2, 80 20, 120 8 S 200 2, 216 10"></path>
         </svg>
         <p class="lead" id="hero-lead" data-editable="text">Pintamos interiores y acabados decorativos con materiales de calidad y un trabajo limpio y cuidadoso. Presupuesto gratis, sin compromiso.</p>
         <div class="hero-cta">
@@ -740,9 +750,9 @@
           <a class="btn btn-ghost" href="#servicios" id="hero-cta-ghost" data-editable="text">Ver servicios</a>
         </div>
         <div class="hero-badges">
-          <span class="hero-badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg> <span id="hero-badge-1" data-editable="text">Presupuesto gratuito</span></span>
-          <span class="hero-badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg> <span id="hero-badge-2" data-editable="text">Trabajo limpio y cuidadoso</span></span>
-          <span class="hero-badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg> <span id="hero-badge-3" data-editable="text">Calidad garantizada</span></span>
+          <span class="hero-badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"></path></svg> <span id="hero-badge-1" data-editable="text">Presupuesto gratuito</span></span>
+          <span class="hero-badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"></path></svg> <span id="hero-badge-2" data-editable="text">Trabajo limpio y cuidadoso</span></span>
+          <span class="hero-badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"></path></svg> <span id="hero-badge-3" data-editable="text">Calidad garantizada</span></span>
         </div>
       </div>
       <div class="hero-visual">
@@ -750,35 +760,35 @@
       </div>
     </div>
     <svg class="wave" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true">
-      <path fill="currentColor" d="M0,40 C250,90 450,0 700,30 C900,54 1050,10 1200,35 L1200,80 L0,80 Z"/>
+      <path fill="currentColor" d="M0,40 C250,90 450,0 700,30 C900,54 1050,10 1200,35 L1200,80 L0,80 Z"></path>
     </svg>
   </section>
 
   <section class="services" id="servicios">
     <div class="wrap">
-      <div class="section-head reveal">
+      <div class="section-head reveal" style="">
         <p class="eyebrow" id="svc-eyebrow" data-editable="text">Servicios</p>
         <h2 id="svc-h2" data-editable="text">Todo lo que tu espacio necesita</h2>
         <p id="svc-intro" data-editable="text">De una habitación a la casa completa: nos encargamos de la preparación, la pintura y la limpieza final.</p>
       </div>
       <div class="grid-3">
-        <div class="card reveal deletable">
+        <div class="card reveal deletable" style="">
           <div class="icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-9"/><path d="M9 20v-6h6v6"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5 10v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-9"></path><path d="M9 20v-6h6v6"></path></svg>
           </div>
           <h3 id="svc1-title" data-editable="text">Pintura de Viviendas</h3>
           <p id="svc1-desc" data-editable="text">Interiores con acabados duraderos, cuidando cada rincón de tu casa.</p>
         </div>
-        <div class="card reveal deletable">
+        <div class="card reveal deletable" style="">
           <div class="icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11 18 2l3 3-9 9-4 1z"/><path d="M13 6 3.5 15.5a3 3 0 0 0 0 4.24 3 3 0 0 0 4.24 0L17 10"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11 18 2l3 3-9 9-4 1z"></path><path d="M13 6 3.5 15.5a3 3 0 0 0 0 4.24 3 3 0 0 0 4.24 0L17 10"></path></svg>
           </div>
           <h3 id="svc2-title" data-editable="text">Decoración</h3>
           <p id="svc2-desc" data-editable="text">Combinaciones de color y texturas decorativas que dan personalidad a cada espacio.</p>
         </div>
-        <div class="card reveal deletable">
+        <div class="card reveal deletable" style="">
           <div class="icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 4 6v6c0 5 3.4 8.5 8 9 4.6-.5 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 4 6v6c0 5 3.4 8.5 8 9 4.6-.5 8-4 8-9V6l-8-3Z"></path><path d="m9 12 2 2 4-4"></path></svg>
           </div>
           <h3 id="svc3-title" data-editable="text">Trabajo Limpio y Confiable</h3>
           <p id="svc3-desc" data-editable="text">Protegemos muebles y suelos, y dejamos el espacio tan limpio como lo encontramos.</p>
@@ -789,22 +799,22 @@
 
   <section id="equipo">
     <div class="wrap">
-      <div class="section-head reveal">
+      <div class="section-head reveal" style="">
         <p class="eyebrow" id="equipo-eyebrow" data-editable="text">Profesionales</p>
         <h2 id="equipo-h2" data-editable="text">Manos con oficio en cada trabajo</h2>
         <p id="equipo-lead" data-editable="text">Cuidamos cada detalle, desde la preparación de la superficie hasta el último repaso antes de irnos.</p>
       </div>
       <div class="team-grid" id="equipoGrid">
-        <div class="team-card reveal deletable">
+        <div class="team-card reveal deletable" style="">
           <img id="img-equipo-1" data-editable="image" src="foto-equipo-1.jpg" alt="Aplicando pintura con rodillo sobre una pared">
           <div class="cap" id="equipo-cap-1" data-editable="text">Aplicación con rodillo</div>
         </div>
-        <div class="team-card reveal deletable">
+        <div class="team-card reveal deletable" style="">
           <img id="img-equipo-2" data-editable="image" src="foto-equipo-2.jpg" alt="Trabajo de acabado con herramientas">
           <div class="cap" id="equipo-cap-2" data-editable="text">Acabados con cuidado al detalle</div>
         </div>
         <button type="button" class="add-photo-btn" data-add-target="equipoGrid" data-add-type="team-card">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"></path></svg>
           Añadir foto
         </button>
       </div>
@@ -817,25 +827,25 @@
         <p class="eyebrow" id="nosotros-eyebrow" data-editable="text">Por qué elegirnos</p>
         <h2 id="nosotros-h2" data-editable="text" style="font-size:clamp(1.6rem,3vw,2.1rem);color:var(--navy);margin:8px 0 28px;">Un trabajo cuidado, de principio a fin</h2>
         <div class="grid-2x2">
-          <div class="why-item reveal deletable">
-            <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20.59 13.41 11 3.83A2 2 0 0 0 9.58 3H4a1 1 0 0 0-1 1v5.57a2 2 0 0 0 .59 1.42l9.58 9.59a2 2 0 0 0 2.83 0l4.59-4.59a2 2 0 0 0 0-2.58Z"/><circle cx="7.5" cy="7.5" r="1.1" fill="currentColor" stroke="none"/></svg></div>
+          <div class="why-item reveal deletable" style="">
+            <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20.59 13.41 11 3.83A2 2 0 0 0 9.58 3H4a1 1 0 0 0-1 1v5.57a2 2 0 0 0 .59 1.42l9.58 9.59a2 2 0 0 0 2.83 0l4.59-4.59a2 2 0 0 0 0-2.58Z"></path><circle cx="7.5" cy="7.5" r="1.1" fill="currentColor" stroke="none"></circle></svg></div>
             <div><h3 id="why1-title" data-editable="text">Presupuesto sin compromiso</h3><p id="why1-desc" data-editable="text">Vemos el espacio y te damos un precio claro antes de empezar.</p></div>
           </div>
-          <div class="why-item reveal deletable">
-            <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2s-6 7.1-6 11.3A6 6 0 0 0 12 21a6 6 0 0 0 6-7.7C18 9.1 12 2 12 2Z"/></svg></div>
+          <div class="why-item reveal deletable" style="">
+            <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2s-6 7.1-6 11.3A6 6 0 0 0 12 21a6 6 0 0 0 6-7.7C18 9.1 12 2 12 2Z"></path></svg></div>
             <div><h3 id="why2-title" data-editable="text">Materiales de calidad</h3><p id="why2-desc" data-editable="text">Pinturas y acabados pensados para durar, no solo para lucir bien el primer día.</p></div>
           </div>
-          <div class="why-item reveal deletable">
-            <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg></div>
+          <div class="why-item reveal deletable" style="">
+            <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3.2 2"></path></svg></div>
             <div><h3 id="why3-title" data-editable="text">Puntualidad</h3><p id="why3-desc" data-editable="text">Llegamos cuando decimos que vamos a llegar, y avisamos si algo cambia.</p></div>
           </div>
-          <div class="why-item reveal deletable">
-            <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8.5" r="5"/><path d="m8.3 13 -1.1 7.5 4.8-2.6 4.8 2.6-1.1-7.5"/></svg></div>
+          <div class="why-item reveal deletable" style="">
+            <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8.5" r="5"></circle><path d="m8.3 13 -1.1 7.5 4.8-2.6 4.8 2.6-1.1-7.5"></path></svg></div>
             <div><h3 id="why4-title" data-editable="text">Garantía de satisfacción</h3><p id="why4-desc" data-editable="text">Revisamos el resultado contigo antes de dar el trabajo por terminado.</p></div>
           </div>
         </div>
       </div>
-      <div class="why-visual reveal">
+      <div class="why-visual reveal" style="">
         <p class="eyebrow" id="why-visual-eyebrow" data-editable="text">Nuestro compromiso</p>
         <h3 id="why-visual-h3" data-editable="text">Pintura Profesional. Calidad Garantizada.</h3>
         <p id="why-visual-p" data-editable="text">Así lo decimos en nuestro propio nombre: no entregamos un trabajo hasta que esté a la altura de lo que prometimos.</p>
@@ -845,11 +855,11 @@
 
   <section id="resenas" style="background:var(--surface);">
     <div class="wrap">
-      <div class="section-head reveal">
+      <div class="section-head reveal" style="">
         <p class="eyebrow" id="resenas-eyebrow" data-editable="text">Reseñas</p>
         <h2 id="resenas-h2" data-editable="text">Lo que opinan nuestros clientes</h2>
       </div>
-      <div class="reviews-empty reveal">
+      <div class="reviews-empty reveal" style="">
         <p id="resenas-empty-text" data-editable="text">Todavía no tenemos reseñas publicadas. Si confías en nosotros para tu proyecto, sé de los primeros en contarnos cómo te fue.</p>
       </div>
     </div>
@@ -857,7 +867,7 @@
 
   <section id="trabajos">
     <div class="wrap">
-      <div class="section-head reveal">
+      <div class="section-head reveal" style="">
         <p class="eyebrow" id="trabajos-eyebrow" data-editable="text">Trabajos realizados</p>
         <h2 id="trabajos-h2" data-editable="text">Así dejamos los espacios</h2>
         <p id="trabajos-lead" data-editable="text">Fotos reales del tipo de acabado que buscamos en cada proyecto.</p>
@@ -869,7 +879,7 @@
         <figure class="gallery-photo deletable"><img id="img-portfolio-comedor-2" data-editable="image" src="foto-real-comedor-2.jpg" alt="Comedor pintado"></figure>
         <figure class="gallery-photo deletable"><img id="img-portfolio-comedor-3" data-editable="image" src="foto-empty-comedor-2.jpg" alt="Comedor pintado"></figure>
         <button type="button" class="add-photo-btn" data-add-target="grid-comedor" data-add-type="gallery-photo">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"></path></svg>
           Añadir foto
         </button>
       </div>
@@ -880,7 +890,7 @@
         <figure class="gallery-photo deletable"><img id="img-portfolio-salon-2" data-editable="image" src="foto-real-salon-2.jpg" alt="Salón pintado"></figure>
         <figure class="gallery-photo deletable"><img id="img-portfolio-salon-3" data-editable="image" src="foto-empty-salon-1.jpg" alt="Salón pintado"></figure>
         <button type="button" class="add-photo-btn" data-add-target="grid-salon" data-add-type="gallery-photo">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"></path></svg>
           Añadir foto
         </button>
       </div>
@@ -891,7 +901,7 @@
         <figure class="gallery-photo deletable"><img id="img-portfolio-dormitorio-2" data-editable="image" src="foto-empty-dormitorio-2.jpg" alt="Dormitorio pintado"></figure>
         <figure class="gallery-photo deletable"><img id="img-portfolio-dormitorio-3" data-editable="image" src="foto-empty-dormitorio-3.jpg" alt="Dormitorio pintado"></figure>
         <button type="button" class="add-photo-btn" data-add-target="grid-dormitorio" data-add-type="gallery-photo">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"></path></svg>
           Añadir foto
         </button>
       </div>
@@ -933,24 +943,24 @@
 
   <section class="process" id="proceso">
     <div class="wrap">
-      <div class="section-head reveal">
+      <div class="section-head reveal" style="">
         <p class="eyebrow" id="proceso-eyebrow" data-editable="text">Cómo trabajamos</p>
         <h2 id="proceso-h2" data-editable="text">Cuatro pasos, sin sorpresas</h2>
       </div>
       <div class="steps">
-        <div class="step reveal deletable"><span class="num">01</span><h3 id="step1-title" data-editable="text">Contacto</h3><p id="step1-desc" data-editable="text">Nos cuentas qué quieres pintar y dónde.</p></div>
-        <div class="step reveal deletable"><span class="num">02</span><h3 id="step2-title" data-editable="text">Visita y presupuesto</h3><p id="step2-desc" data-editable="text">Vemos el espacio y te damos un precio gratuito, sin compromiso.</p></div>
-        <div class="step reveal deletable"><span class="num">03</span><h3 id="step3-title" data-editable="text">Pintamos</h3><p id="step3-desc" data-editable="text">Preparamos la superficie y aplicamos con cuidado y materiales de calidad.</p></div>
-        <div class="step reveal deletable"><span class="num">04</span><h3 id="step4-title" data-editable="text">Revisión final</h3><p id="step4-desc" data-editable="text">Repasamos juntos el resultado antes de darlo por terminado.</p></div>
+        <div class="step reveal deletable" style=""><span class="num">01</span><h3 id="step1-title" data-editable="text">Contacto</h3><p id="step1-desc" data-editable="text">Nos cuentas qué quieres pintar y dónde.</p></div>
+        <div class="step reveal deletable" style=""><span class="num">02</span><h3 id="step2-title" data-editable="text">Visita y presupuesto</h3><p id="step2-desc" data-editable="text">Vemos el espacio y te damos un precio gratuito, sin compromiso.</p></div>
+        <div class="step reveal deletable" style=""><span class="num">03</span><h3 id="step3-title" data-editable="text">Pintamos</h3><p id="step3-desc" data-editable="text">Preparamos la superficie y aplicamos con cuidado y materiales de calidad.</p></div>
+        <div class="step reveal deletable" style=""><span class="num">04</span><h3 id="step4-title" data-editable="text">Revisión final</h3><p id="step4-desc" data-editable="text">Repasamos juntos el resultado antes de darlo por terminado.</p></div>
       </div>
     </div>
   </section>
 
   <section id="zona">
     <div class="wrap">
-      <div class="zone-card reveal">
+      <div class="zone-card reveal" style="">
         <div class="icon">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-7.4 7-12.5A7 7 0 0 0 5 9.5C5 14.6 12 22 12 22Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-7.4 7-12.5A7 7 0 0 0 5 9.5C5 14.6 12 22 12 22Z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>
         </div>
         <div>
           <h3 id="zona-h3" data-editable="text">Trabajamos en Barcelona y alrededores</h3>
@@ -962,37 +972,37 @@
 
   <section id="preguntas">
     <div class="wrap">
-      <div class="section-head reveal">
+      <div class="section-head reveal" style="">
         <p class="eyebrow" id="preguntas-eyebrow" data-editable="text">Preguntas frecuentes</p>
         <h2 id="preguntas-h2" data-editable="text">Dudas que nos hacen seguido</h2>
       </div>
-      <div class="faq-list reveal">
+      <div class="faq-list reveal" style="">
         <details class="faq-item deletable">
-          <summary><span id="faq1-q" data-editable="text">¿Cuánto cuesta pintar mi casa?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary><span id="faq1-q" data-editable="text">¿Cuánto cuesta pintar mi casa?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></summary>
           <p id="faq1-a" data-editable="text">No hay un precio fijo: depende del tamaño del espacio y el tipo de acabado. Por eso la visita y el presupuesto son gratis y sin compromiso.</p>
         </details>
         <details class="faq-item deletable">
-          <summary><span id="faq2-q" data-editable="text">¿Tengo que mover los muebles yo?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary><span id="faq2-q" data-editable="text">¿Tengo que mover los muebles yo?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></summary>
           <p id="faq2-a" data-editable="text">Nosotros protegemos y movemos lo necesario dentro del espacio. Si hay algo muy grande o frágil, lo comentamos contigo antes de empezar.</p>
         </details>
         <details class="faq-item deletable">
-          <summary><span id="faq3-q" data-editable="text">¿Cuánto tardan en terminar un trabajo?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary><span id="faq3-q" data-editable="text">¿Cuánto tardan en terminar un trabajo?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></summary>
           <p id="faq3-a" data-editable="text">Depende del tamaño y la cantidad de habitaciones. En la visita gratuita te damos un tiempo estimado real, no una cifra al aire.</p>
         </details>
         <details class="faq-item deletable">
-          <summary><span id="faq4-q" data-editable="text">¿Qué pasa si el color no queda como esperaba?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary><span id="faq4-q" data-editable="text">¿Qué pasa si el color no queda como esperaba?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></summary>
           <p id="faq4-a" data-editable="text">Revisamos el resultado contigo antes de dar el trabajo por terminado, así que no se queda nada a medias.</p>
         </details>
         <details class="faq-item deletable">
-          <summary><span id="faq5-q" data-editable="text">¿En qué zonas trabajan?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary><span id="faq5-q" data-editable="text">¿En qué zonas trabajan?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></summary>
           <p id="faq5-a" data-editable="text">Barcelona y alrededores. Si no estás seguro de si llegamos a tu zona, escríbenos y lo confirmamos.</p>
         </details>
         <details class="faq-item deletable">
-          <summary><span id="faq6-q" data-editable="text">¿Tengo que pagar algo por la visita o el presupuesto?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary><span id="faq6-q" data-editable="text">¿Tengo que pagar algo por la visita o el presupuesto?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></summary>
           <p id="faq6-a" data-editable="text">No, la visita y el presupuesto son totalmente gratis, sin ningún compromiso de contratar.</p>
         </details>
         <button type="button" class="add-faq-btn" id="addFaqBtn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"></path></svg>
           Añadir pregunta
         </button>
       </div>
@@ -1001,52 +1011,52 @@
 
   <section id="contacto">
     <div class="wrap">
-      <div class="section-head reveal">
+      <div class="section-head reveal" style="">
         <p class="eyebrow" id="contacto-eyebrow" data-editable="text">Contacto</p>
         <h2 id="contacto-h2" data-editable="text">Cuéntanos qué necesitas pintar</h2>
       </div>
       <div class="contact-layout">
-        <div class="contact-card reveal">
+        <div class="contact-card reveal" style="">
           <div class="contact-row deletable">
-            <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.4 2.1L8 9.9a16 16 0 0 0 6 6l1.4-1.4a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.8 2Z"/></svg></div>
+            <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.4 2.1L8 9.9a16 16 0 0 0 6 6l1.4-1.4a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.8 2Z"></path></svg></div>
             <div>
               <div class="label" id="label-phone" data-editable="text">Teléfono</div>
               <div class="value copy-row"><span class="" id="phone-text" data-editable="text" data-sync="phone">(+34) 645239750</span></div>
             </div>
           </div>
           <div class="contact-row deletable">
-            <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div>
+            <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg></div>
             <div>
               <div class="label" id="label-email" data-editable="text">Correo</div>
               <div class="value copy-row"><a href="mailto:michristpainting@gmail.com" id="email-text" data-editable="text" data-sync="email" data-sync-href="email">michristpainting@gmail.com</a></div>
             </div>
           </div>
           <div class="contact-row deletable">
-            <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-7.4 7-12.5A7 7 0 0 0 5 9.5C5 14.6 12 22 12 22Z"/><circle cx="12" cy="9.5" r="2.5"/></svg></div>
+            <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-7.4 7-12.5A7 7 0 0 0 5 9.5C5 14.6 12 22 12 22Z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg></div>
             <div>
               <div class="label" id="label-zona" data-editable="text">Zona de servicio</div>
               <div class="value" id="contacto-zona" data-editable="text">Barcelona y alrededores</div>
             </div>
           </div>
           <div class="pending-note deletable deleted-hidden">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex:none;margin-top:2px;"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex:none;margin-top:2px;"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"></path></svg>
             <span id="pending-note-text" data-editable="text">Falta el teléfono real — pídele a Claude que lo actualice, o edita este bloque directamente, antes de compartir la página.</span>
           </div>
         </div>
-        <form class="cta-block reveal" id="quoteForm">
+        <form class="cta-block reveal" id="quoteForm" style="">
           <h3 id="cta-h3" data-editable="text">¿Listo para darle color a tu espacio?</h3>
           <p id="cta-p" data-editable="text">Déjanos tus datos y te respondemos con un presupuesto gratuito, sin compromiso.</p>
           <div class="form-row">
             <label for="qf-name" id="qf-name-label" data-editable="text">Nombre</label>
-            <input type="text" id="qf-name" name="Nombre" autocomplete="name" required>
+            <input type="text" id="qf-name" name="Nombre" autocomplete="name" required="">
           </div>
           <div class="form-row">
             <label for="qf-phone" id="qf-phone-label" data-editable="text">Teléfono</label>
-            <input type="tel" id="qf-phone" name="Teléfono" autocomplete="tel" required>
+            <input type="tel" id="qf-phone" name="Teléfono" autocomplete="tel" required="">
           </div>
           <div class="form-row">
             <label for="qf-message" id="qf-message-label" data-editable="text">¿Qué necesitas pintar?</label>
-            <textarea id="qf-message" name="Mensaje" rows="3" required placeholder="Ej: el salón, unos 20 m². Si ya tienes una idea de color, cuéntanosla."></textarea>
+            <textarea id="qf-message" name="Mensaje" rows="3" required="" placeholder="Ej: el salón, unos 20 m². Si ya tienes una idea de color, cuéntanosla."></textarea>
           </div>
           <button type="submit" class="btn btn-primary" id="qf-submit" style="width:100%;">Solicitar presupuesto</button>
           <p class="form-note" id="qf-status" role="status"></p>
@@ -1091,7 +1101,7 @@
     </div>
   </div>
   <div class="wrap footer-bottom">
-    <small id="footer-copyright" data-editable="text">&copy; 2026 Michrist Painting — Barcelona</small>
+    <small id="footer-copyright" data-editable="text">© 2026 Michrist Painting — Barcelona</small>
   </div>
 </footer>
 
@@ -1248,19 +1258,19 @@
 -->
 
 <button class="to-top" id="toTop" aria-label="Volver arriba">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"></path></svg>
 </button>
 <a class="faq-shortcut" id="faqShortcut" href="#preguntas" aria-label="Ir a preguntas frecuentes" title="Preguntas frecuentes">?</a>
 
 <div class="toast" id="toast"></div>
 
 <button class="edit-toggle" id="editToggle" aria-label="Modo de edición" title="Editar esta página">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>
 </button>
 <div class="edit-bar" id="editBar">
   <span>Modo de edición: toca un texto para cambiarlo, la foto para subir otra, o la X para quitar algo. El cliente no ve nada de esto hasta que pulses Actualizar.</span>
   <button type="button" class="trash-toggle" id="colorToggle">🎨 Colores</button>
-  <button type="button" class="trash-toggle" id="trashToggle">🗑 Papelera (<span id="trashCount">0</span>)</button>
+  <button type="button" class="trash-toggle" id="trashToggle">🗑 Papelera (<span id="trashCount">1</span>)</button>
   <button type="button" class="btn btn-ghost btn-sm" id="editCancel" style="background:transparent;border-color:rgba(255,255,255,.4);color:#fff;">Cancelar</button>
   <button type="button" class="btn btn-primary btn-sm" id="editSave">Actualizar</button>
 </div>
@@ -1269,20 +1279,26 @@
   <div class="color-row">
     <label for="colorAmber">Color principal (botones)</label>
     <input type="color" id="colorAmber" value="#f5a623">
+    <input type="text" class="color-hex" id="colorAmberHex" value="#f5a623" maxlength="7" spellcheck="false" aria-label="Código del color principal">
   </div>
   <div class="color-row">
     <label for="colorNavy">Azul marino (textos y fondos oscuros)</label>
     <input type="color" id="colorNavy" value="#0b2a52">
+    <input type="text" class="color-hex" id="colorNavyHex" value="#0b2a52" maxlength="7" spellcheck="false" aria-label="Código del azul marino">
   </div>
   <div class="color-row">
     <label for="colorBlue">Azul (acentos y enlaces)</label>
     <input type="color" id="colorBlue" value="#1f5fae">
+    <input type="text" class="color-hex" id="colorBlueHex" value="#1f5fae" maxlength="7" spellcheck="false" aria-label="Código del azul">
   </div>
-  <button type="button" class="btn btn-ghost btn-sm" id="colorReset" style="width:100%;margin-top:10px;">Restablecer colores originales</button>
+  <div style="display:flex;gap:8px;margin-top:10px;">
+    <button type="button" class="btn btn-ghost btn-sm" id="colorUndo" style="flex:1;" disabled>↩ Deshacer</button>
+    <button type="button" class="btn btn-ghost btn-sm" id="colorReset" style="flex:1;">Restablecer</button>
+  </div>
 </div>
 <div class="trash-panel" id="trashPanel">
   <h4>Elementos eliminados</h4>
-  <div id="trashList"><p class="trash-empty">No has eliminado nada todavía.</p></div>
+  <div id="trashList"><div class="trash-item"><span>Falta el teléfono real — pídele a Claude que</span><button type="button" class="btn btn-ghost btn-sm">Restaurar</button></div></div>
 </div>
 <input type="file" id="editFileInput" accept="image/*" style="display:none;">
 
@@ -1558,9 +1574,13 @@
     var colorToggle = document.getElementById('colorToggle');
     var colorPanel = document.getElementById('colorPanel');
     var colorAmber = document.getElementById('colorAmber');
+    var colorAmberHex = document.getElementById('colorAmberHex');
     var colorNavy = document.getElementById('colorNavy');
+    var colorNavyHex = document.getElementById('colorNavyHex');
     var colorBlue = document.getElementById('colorBlue');
+    var colorBlueHex = document.getElementById('colorBlueHex');
     var colorReset = document.getElementById('colorReset');
+    var colorUndo = document.getElementById('colorUndo');
     var DEFAULT_COLORS = { amber: '#f5a623', navy: '#0b2a52', blue: '#1f5fae' };
 
     trashToggle.addEventListener('click', function(){
@@ -1594,22 +1614,83 @@
     function applyNavy(hex){ setVar('--navy', hex); setVar('--navy-fixed', hex); }
     function applyBlue(hex){ setVar('--blue', hex); setVar('--blue-fixed', hex); setVar('--blue-bright', shade(hex, 0.18)); }
 
+    function isHex(v){ return /^#[0-9a-f]{6}$/i.test(v || ''); }
+
+    function cur(name, fallback){
+      var v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+      return isHex(v) ? v : fallback;
+    }
+    function currentColors(){
+      return {
+        amber: cur('--amber', DEFAULT_COLORS.amber),
+        navy: cur('--navy-fixed', DEFAULT_COLORS.navy),
+        blue: cur('--blue-fixed', DEFAULT_COLORS.blue)
+      };
+    }
     function syncColorInputs(){
-      var root = getComputedStyle(document.documentElement);
-      function cur(name, fallback){ var v = root.getPropertyValue(name).trim(); return /^#[0-9a-f]{6}$/i.test(v) ? v : fallback; }
-      colorAmber.value = cur('--amber', DEFAULT_COLORS.amber);
-      colorNavy.value = cur('--navy-fixed', DEFAULT_COLORS.navy);
-      colorBlue.value = cur('--blue-fixed', DEFAULT_COLORS.blue);
+      var c = currentColors();
+      colorAmber.value = c.amber; colorAmberHex.value = c.amber;
+      colorNavy.value = c.navy; colorNavyHex.value = c.navy;
+      colorBlue.value = c.blue; colorBlueHex.value = c.blue;
     }
 
-    colorAmber.addEventListener('input', function(){ applyAmber(colorAmber.value); });
-    colorNavy.addEventListener('input', function(){ applyNavy(colorNavy.value); });
-    colorBlue.addEventListener('input', function(){ applyBlue(colorBlue.value); });
+    // one-step undo, scoped to this panel: every time a color picker or hex
+    // field is actually changed (not while still dragging/typing), the state
+    // from just before that change goes on a small stack so a wrong pick is
+    // one click to take back, without discarding every other edit the way
+    // the main "Cancelar" button does.
+    var colorHistory = [];
+    var colorBeforeChange = null;
+    function commitColorChange(prevState){
+      colorHistory.push(prevState);
+      colorUndo.disabled = false;
+    }
+    function applyColors(c){ applyAmber(c.amber); applyNavy(c.navy); applyBlue(c.blue); syncColorInputs(); }
+
+    function wireColorPair(colorInput, hexInput, applyFn){
+      colorInput.addEventListener('focus', function(){ colorBeforeChange = currentColors(); });
+      colorInput.addEventListener('input', function(){
+        hexInput.value = colorInput.value;
+        applyFn(colorInput.value);
+      });
+      colorInput.addEventListener('change', function(){
+        if (colorBeforeChange) { commitColorChange(colorBeforeChange); colorBeforeChange = null; }
+      });
+      hexInput.addEventListener('focus', function(){ colorBeforeChange = currentColors(); });
+      hexInput.addEventListener('input', function(){
+        var v = hexInput.value.trim();
+        if (v && v.charAt(0) !== '#') v = '#' + v;
+        if (isHex(v)) { colorInput.value = v; applyFn(v); }
+      });
+      hexInput.addEventListener('change', function(){
+        var v = hexInput.value.trim();
+        if (v && v.charAt(0) !== '#') v = '#' + v;
+        if (isHex(v)) {
+          hexInput.value = v;
+          if (colorBeforeChange) { commitColorChange(colorBeforeChange); colorBeforeChange = null; }
+        } else {
+          hexInput.value = colorInput.value; // ignore an invalid code, keep the last good one
+        }
+      });
+    }
+    wireColorPair(colorAmber, colorAmberHex, applyAmber);
+    wireColorPair(colorNavy, colorNavyHex, applyNavy);
+    wireColorPair(colorBlue, colorBlueHex, applyBlue);
+
+    colorUndo.addEventListener('click', function(){
+      var prev = colorHistory.pop();
+      if (!prev) return;
+      applyColors(prev);
+      if (!colorHistory.length) colorUndo.disabled = true;
+      showToast('Deshecho.');
+    });
     colorReset.addEventListener('click', function(){
+      var prev = currentColors();
       applyAmber(DEFAULT_COLORS.amber);
       applyNavy(DEFAULT_COLORS.navy);
       applyBlue(DEFAULT_COLORS.blue);
       syncColorInputs();
+      commitColorChange(prev);
       showToast('Colores restablecidos.');
     });
 
@@ -1632,6 +1713,8 @@
         else document.documentElement.style.removeProperty(v);
       });
       syncColorInputs();
+      colorHistory = [];
+      colorUndo.disabled = true;
     }
 
     function setEditMode(on){
@@ -1672,6 +1755,8 @@
       if (cEditSave) { cEditSave.removeAttribute('disabled'); cEditSave.textContent = 'Actualizar'; }
       var cTrashPanel = clone.querySelector('#trashPanel');
       if (cTrashPanel) cTrashPanel.classList.remove('show');
+      var cColorPanel = clone.querySelector('#colorPanel');
+      if (cColorPanel) cColorPanel.classList.remove('show');
       clone.querySelectorAll('.reveal').forEach(function(el){
         el.classList.remove('reveal-init', 'reveal-visible');
         if (el.style) el.style.removeProperty('transition-delay');
@@ -1962,5 +2047,6 @@
   })();
   */
 </script>
+
 
 </body></html>
