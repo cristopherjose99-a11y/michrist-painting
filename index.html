@@ -1251,11 +1251,17 @@
       status.textContent = '';
       status.className = 'form-note';
 
+      var ctrl = ('AbortController' in window) ? new AbortController() : null;
+      var timedOut = false;
+      var timer = setTimeout(function(){ timedOut = true; if (ctrl) ctrl.abort(); }, 12000);
+
       fetch('https://formsubmit.co/ajax/' + encodeURIComponent(to), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
+        signal: ctrl ? ctrl.signal : undefined
       }).then(function(res){
+        clearTimeout(timer);
         if (!res.ok) throw new Error('bad status');
         return res.json();
       }).then(function(){
@@ -1263,6 +1269,7 @@
         status.textContent = '¡Listo! Te contactamos pronto.';
         status.className = 'form-note ok';
       }).catch(function(){
+        clearTimeout(timer);
         status.textContent = 'No se pudo enviar. Llámanos o escríbenos directo por correo.';
         status.className = 'form-note err';
       }).then(function(){
