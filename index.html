@@ -412,6 +412,20 @@
   .faq-item .faq-chevron{flex:none;color:var(--blue-bright);transition:transform .2s ease;}
   .faq-item[open] .faq-chevron{transform:rotate(180deg);}
   .faq-item p{margin:0;padding:0 2px 20px;font-size:.95rem;max-width:65ch;}
+  .add-faq-btn{
+    display:none;
+    align-items:center;gap:10px;
+    width:100%;
+    padding:18px 2px;
+    margin-top:14px;
+    border:2px dashed var(--line);border-radius:12px;
+    background:transparent;color:var(--blue);
+    font-family:var(--font-body);font-weight:600;font-size:.95rem;
+    cursor:pointer;
+    transition:border-color .2s ease, color .2s ease, background .2s ease;
+  }
+  body.edit-mode .add-faq-btn{display:flex;}
+  .add-faq-btn:hover{border-color:var(--blue-bright);color:var(--blue-bright);background:var(--sky);}
 
   /* zone */
   .zone-card{
@@ -665,6 +679,10 @@
   .trash-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);}
   .trash-item:last-child{border-bottom:none;}
   .trash-item span{font-size:.85rem;color:var(--ink);}
+  .color-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);}
+  .color-row:last-of-type{border-bottom:none;}
+  .color-row label{font-size:.85rem;color:var(--ink);flex:1;}
+  .color-row input[type="color"]{width:42px;height:32px;border:1px solid var(--line);border-radius:8px;padding:2px;cursor:pointer;background:none;flex:none;}
   .add-photo-btn{
     display:none;
     flex-direction:column;align-items:center;justify-content:center;gap:8px;
@@ -949,30 +967,34 @@
         <h2 id="preguntas-h2" data-editable="text">Dudas que nos hacen seguido</h2>
       </div>
       <div class="faq-list reveal">
-        <details class="faq-item">
+        <details class="faq-item deletable">
           <summary><span id="faq1-q" data-editable="text">¿Cuánto cuesta pintar mi casa?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <p id="faq1-a" data-editable="text">No hay un precio fijo: depende del tamaño del espacio y el tipo de acabado. Por eso la visita y el presupuesto son gratis y sin compromiso.</p>
         </details>
-        <details class="faq-item">
+        <details class="faq-item deletable">
           <summary><span id="faq2-q" data-editable="text">¿Tengo que mover los muebles yo?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <p id="faq2-a" data-editable="text">Nosotros protegemos y movemos lo necesario dentro del espacio. Si hay algo muy grande o frágil, lo comentamos contigo antes de empezar.</p>
         </details>
-        <details class="faq-item">
+        <details class="faq-item deletable">
           <summary><span id="faq3-q" data-editable="text">¿Cuánto tardan en terminar un trabajo?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <p id="faq3-a" data-editable="text">Depende del tamaño y la cantidad de habitaciones. En la visita gratuita te damos un tiempo estimado real, no una cifra al aire.</p>
         </details>
-        <details class="faq-item">
+        <details class="faq-item deletable">
           <summary><span id="faq4-q" data-editable="text">¿Qué pasa si el color no queda como esperaba?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <p id="faq4-a" data-editable="text">Revisamos el resultado contigo antes de dar el trabajo por terminado, así que no se queda nada a medias.</p>
         </details>
-        <details class="faq-item">
+        <details class="faq-item deletable">
           <summary><span id="faq5-q" data-editable="text">¿En qué zonas trabajan?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <p id="faq5-a" data-editable="text">Barcelona y alrededores. Si no estás seguro de si llegamos a tu zona, escríbenos y lo confirmamos.</p>
         </details>
-        <details class="faq-item">
+        <details class="faq-item deletable">
           <summary><span id="faq6-q" data-editable="text">¿Tengo que pagar algo por la visita o el presupuesto?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <p id="faq6-a" data-editable="text">No, la visita y el presupuesto son totalmente gratis, sin ningún compromiso de contratar.</p>
         </details>
+        <button type="button" class="add-faq-btn" id="addFaqBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+          Añadir pregunta
+        </button>
       </div>
     </div>
   </section>
@@ -1237,9 +1259,26 @@
 </button>
 <div class="edit-bar" id="editBar">
   <span>Modo de edición: toca un texto para cambiarlo, la foto para subir otra, o la X para quitar algo. El cliente no ve nada de esto hasta que pulses Actualizar.</span>
+  <button type="button" class="trash-toggle" id="colorToggle">🎨 Colores</button>
   <button type="button" class="trash-toggle" id="trashToggle">🗑 Papelera (<span id="trashCount">0</span>)</button>
   <button type="button" class="btn btn-ghost btn-sm" id="editCancel" style="background:transparent;border-color:rgba(255,255,255,.4);color:#fff;">Cancelar</button>
   <button type="button" class="btn btn-primary btn-sm" id="editSave">Actualizar</button>
+</div>
+<div class="trash-panel" id="colorPanel">
+  <h4>Colores de la marca</h4>
+  <div class="color-row">
+    <label for="colorAmber">Color principal (botones)</label>
+    <input type="color" id="colorAmber" value="#f5a623">
+  </div>
+  <div class="color-row">
+    <label for="colorNavy">Azul marino (textos y fondos oscuros)</label>
+    <input type="color" id="colorNavy" value="#0b2a52">
+  </div>
+  <div class="color-row">
+    <label for="colorBlue">Azul (acentos y enlaces)</label>
+    <input type="color" id="colorBlue" value="#1f5fae">
+  </div>
+  <button type="button" class="btn btn-ghost btn-sm" id="colorReset" style="width:100%;margin-top:10px;">Restablecer colores originales</button>
 </div>
 <div class="trash-panel" id="trashPanel">
   <h4>Elementos eliminados</h4>
@@ -1516,19 +1555,83 @@
       });
     }
 
+    var colorToggle = document.getElementById('colorToggle');
+    var colorPanel = document.getElementById('colorPanel');
+    var colorAmber = document.getElementById('colorAmber');
+    var colorNavy = document.getElementById('colorNavy');
+    var colorBlue = document.getElementById('colorBlue');
+    var colorReset = document.getElementById('colorReset');
+    var DEFAULT_COLORS = { amber: '#f5a623', navy: '#0b2a52', blue: '#1f5fae' };
+
     trashToggle.addEventListener('click', function(){
+      colorPanel.classList.remove('show');
       trashPanel.classList.toggle('show');
     });
+    colorToggle.addEventListener('click', function(){
+      trashPanel.classList.remove('show');
+      colorPanel.classList.toggle('show');
+    });
+
+    // small hex color helpers: shade(hex, -0.25) darkens 25% toward black,
+    // shade(hex, 0.2) lightens 20% toward white — used to keep the
+    // "-dark"/"-bright" hover shades in step with whatever the owner picks.
+    function hexToRgb(hex){
+      var m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex || '');
+      return m ? [parseInt(m[1], 16), parseInt(m[2], 16), parseInt(m[3], 16)] : [0, 0, 0];
+    }
+    function rgbToHex(r, g, b){
+      function h(n){ n = Math.max(0, Math.min(255, Math.round(n))); var s = n.toString(16); return s.length < 2 ? '0' + s : s; }
+      return '#' + h(r) + h(g) + h(b);
+    }
+    function shade(hex, amt){
+      var c = hexToRgb(hex);
+      if (amt < 0) { var f = 1 + amt; return rgbToHex(c[0] * f, c[1] * f, c[2] * f); }
+      return rgbToHex(c[0] + (255 - c[0]) * amt, c[1] + (255 - c[1]) * amt, c[2] + (255 - c[2]) * amt);
+    }
+    function setVar(name, value){ document.documentElement.style.setProperty(name, value); }
+
+    function applyAmber(hex){ setVar('--amber', hex); setVar('--amber-dark', shade(hex, -0.25)); }
+    function applyNavy(hex){ setVar('--navy', hex); setVar('--navy-fixed', hex); }
+    function applyBlue(hex){ setVar('--blue', hex); setVar('--blue-fixed', hex); setVar('--blue-bright', shade(hex, 0.18)); }
+
+    function syncColorInputs(){
+      var root = getComputedStyle(document.documentElement);
+      function cur(name, fallback){ var v = root.getPropertyValue(name).trim(); return /^#[0-9a-f]{6}$/i.test(v) ? v : fallback; }
+      colorAmber.value = cur('--amber', DEFAULT_COLORS.amber);
+      colorNavy.value = cur('--navy-fixed', DEFAULT_COLORS.navy);
+      colorBlue.value = cur('--blue-fixed', DEFAULT_COLORS.blue);
+    }
+
+    colorAmber.addEventListener('input', function(){ applyAmber(colorAmber.value); });
+    colorNavy.addEventListener('input', function(){ applyNavy(colorNavy.value); });
+    colorBlue.addEventListener('input', function(){ applyBlue(colorBlue.value); });
+    colorReset.addEventListener('click', function(){
+      applyAmber(DEFAULT_COLORS.amber);
+      applyNavy(DEFAULT_COLORS.navy);
+      applyBlue(DEFAULT_COLORS.blue);
+      syncColorInputs();
+      showToast('Colores restablecidos.');
+    });
+
+    var THEME_VARS = ['--amber', '--amber-dark', '--navy', '--navy-fixed', '--blue', '--blue-fixed', '--blue-bright'];
+    var originalColors = {};
 
     function snapshot(){
       originalValues = {};
       editableTexts.forEach(function(el){ originalValues[el.id] = el.textContent; });
       editableImages.forEach(function(el){ originalValues[el.id] = el.getAttribute('src'); });
+      originalColors = {};
+      THEME_VARS.forEach(function(v){ originalColors[v] = document.documentElement.style.getPropertyValue(v); });
     }
 
     function restoreOriginal(){
       editableTexts.forEach(function(el){ if (el.id in originalValues) el.textContent = originalValues[el.id]; });
       editableImages.forEach(function(el){ if (el.id in originalValues) el.setAttribute('src', originalValues[el.id]); });
+      THEME_VARS.forEach(function(v){
+        if (originalColors[v]) document.documentElement.style.setProperty(v, originalColors[v]);
+        else document.documentElement.style.removeProperty(v);
+      });
+      syncColorInputs();
     }
 
     function setEditMode(on){
@@ -1539,7 +1642,7 @@
         if (on) el.setAttribute('contenteditable', 'true');
         else el.removeAttribute('contenteditable');
       });
-      if (on) { snapshot(); injectPhotoButtons(); }
+      if (on) { snapshot(); injectPhotoButtons(); syncColorInputs(); }
     }
 
     // builds the HTML to publish from a DETACHED CLONE of the live page —
@@ -1576,6 +1679,7 @@
       clone.querySelectorAll('[data-editable="text"]').forEach(function(el){ el.removeAttribute('contenteditable'); });
       clone.querySelectorAll('.photo-edit-btn').forEach(function(el){ el.remove(); });
       clone.querySelectorAll('.delete-btn').forEach(function(el){ el.remove(); });
+      clone.querySelectorAll('.faq-item').forEach(function(el){ el.removeAttribute('open'); });
       return '<!doctype html>' + clone.outerHTML;
     }
 
@@ -1658,6 +1762,42 @@
         showToast('No se pudo subir la foto. Inténtalo de nuevo.');
       });
     });
+
+    var addFaqBtn = document.getElementById('addFaqBtn');
+    if (addFaqBtn) {
+      addFaqBtn.addEventListener('click', function(){
+        var qId = uid('faq-q'), aId = uid('faq-a');
+        var details = document.createElement('details');
+        details.className = 'faq-item deletable';
+        details.open = true;
+        var summary = document.createElement('summary');
+        var span = document.createElement('span');
+        span.id = qId;
+        span.setAttribute('data-editable', 'text');
+        span.setAttribute('contenteditable', 'true');
+        span.textContent = 'Nueva pregunta';
+        guardTextField(span);
+        editableTexts.push(span);
+        originalValues[qId] = span.textContent;
+        summary.appendChild(span);
+        summary.insertAdjacentHTML('beforeend', '<svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>');
+        var p = document.createElement('p');
+        p.id = aId;
+        p.setAttribute('data-editable', 'text');
+        p.setAttribute('contenteditable', 'true');
+        p.textContent = 'Escribe aquí la respuesta.';
+        guardTextField(p);
+        editableTexts.push(p);
+        originalValues[aId] = p.textContent;
+        details.appendChild(summary);
+        details.appendChild(p);
+        addFaqBtn.parentElement.insertBefore(details, addFaqBtn);
+        deletables.push(details);
+        injectDeleteButtons();
+        span.focus();
+        showToast('Pregunta añadida. Edita el texto y la respuesta.');
+      });
+    }
 
     editSave.addEventListener('click', function(){
       if (!artifact) return;
