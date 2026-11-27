@@ -457,6 +457,23 @@
   }
   .cta-block h3{color:#fff;font-size:1.4rem;margin-bottom:10px;}
   .cta-block p{color:#cfe0f7;margin-bottom:24px;}
+  .cta-block .form-row{margin-bottom:14px;}
+  .cta-block label{display:block;font-size:.82rem;font-weight:600;color:#cfe0f7;margin-bottom:6px;}
+  .cta-block input, .cta-block textarea{
+    width:100%;
+    border:1px solid rgba(255,255,255,.25);
+    background:rgba(255,255,255,.08);
+    border-radius:10px;
+    padding:10px 12px;
+    font-family:var(--font-body);
+    font-size:.92rem;
+    color:#fff;
+  }
+  .cta-block textarea{resize:vertical;min-height:70px;}
+  .cta-block input:focus, .cta-block textarea:focus{outline:2px solid var(--amber);outline-offset:1px;}
+  .form-note{margin:12px 0 0;font-size:.85rem;min-height:1.2em;}
+  .form-note.ok{color:#9ae6b4;}
+  .form-note.err{color:#feb2b2;}
 
   footer{background:var(--navy);color:#cfe0f7;padding-block:60px 28px;}
   .footer-top{
@@ -899,11 +916,24 @@
             <span id="pending-note-text" data-editable="text">Falta el teléfono real — pídele a Claude que lo actualice, o edita este bloque directamente, antes de compartir la página.</span>
           </div>
         </div>
-        <div class="cta-block reveal">
+        <form class="cta-block reveal" id="quoteForm">
           <h3 id="cta-h3" data-editable="text">¿Listo para darle color a tu espacio?</h3>
-          <p id="cta-p" data-editable="text">Escríbenos y te respondemos con un presupuesto gratuito, sin compromiso.</p>
-          <a class="btn btn-primary" href="mailto:michristpainting@gmail.com?subject=Solicitud%20de%20presupuesto" id="cta-btn" data-editable="text" data-sync-href="email" style="width:100%;">Solicitar presupuesto</a>
-        </div>
+          <p id="cta-p" data-editable="text">Déjanos tus datos y te respondemos con un presupuesto gratuito, sin compromiso.</p>
+          <div class="form-row">
+            <label for="qf-name" id="qf-name-label" data-editable="text">Nombre</label>
+            <input type="text" id="qf-name" name="Nombre" autocomplete="name" required>
+          </div>
+          <div class="form-row">
+            <label for="qf-phone" id="qf-phone-label" data-editable="text">Teléfono</label>
+            <input type="tel" id="qf-phone" name="Teléfono" autocomplete="tel" required>
+          </div>
+          <div class="form-row">
+            <label for="qf-message" id="qf-message-label" data-editable="text">¿Qué necesitas pintar?</label>
+            <textarea id="qf-message" name="Mensaje" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" id="qf-submit" style="width:100%;">Solicitar presupuesto</button>
+          <p class="form-note" id="qf-status" role="status"></p>
+        </form>
       </div>
     </div>
   </section>
@@ -1189,6 +1219,56 @@
       if (!navLinks.classList.contains('mobile-open')) return;
       if (navLinks.contains(e.target) || navToggle.contains(e.target)) return;
       closeMenu();
+    });
+  })();
+
+  // quote request form: sends straight from the page via FormSubmit's AJAX
+  // endpoint (no account needed on our side) instead of opening the
+  // visitor's email app, which many people don't know how to use. The
+  // first-ever submission to a given address makes FormSubmit send that
+  // address a one-time "confirm this form" email; every submission after
+  // that is delivered straight through.
+  (function(){
+    var form = document.getElementById('quoteForm');
+    if (!form) return;
+    var status = document.getElementById('qf-status');
+    var submitBtn = document.getElementById('qf-submit');
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var emailEl = document.getElementById('email-text');
+      var to = (emailEl && emailEl.textContent.trim()) || 'michristpainting@gmail.com';
+      var data = {
+        Nombre: document.getElementById('qf-name').value,
+        'Teléfono': document.getElementById('qf-phone').value,
+        'Qué necesita pintar': document.getElementById('qf-message').value,
+        _subject: 'Solicitud de presupuesto — Michrist Painting',
+        _captcha: 'false'
+      };
+      submitBtn.disabled = true;
+      var prevText = submitBtn.textContent;
+      submitBtn.textContent = 'Enviando…';
+      status.textContent = '';
+      status.className = 'form-note';
+
+      fetch('https://formsubmit.co/ajax/' + encodeURIComponent(to), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(function(res){
+        if (!res.ok) throw new Error('bad status');
+        return res.json();
+      }).then(function(){
+        form.reset();
+        status.textContent = '¡Listo! Te contactamos pronto.';
+        status.className = 'form-note ok';
+      }).catch(function(){
+        status.textContent = 'No se pudo enviar. Llámanos o escríbenos directo por correo.';
+        status.className = 'form-note err';
+      }).then(function(){
+        submitBtn.disabled = false;
+        submitBtn.textContent = prevText;
+      });
     });
   })();
 
