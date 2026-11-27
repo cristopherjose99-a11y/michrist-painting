@@ -276,6 +276,17 @@
     color:#fff;font-weight:600;font-size:.95rem;
   }
 
+  /* reseñas */
+  .reviews-empty{
+    border:1px dashed var(--line);
+    border-radius:16px;
+    padding:36px;
+    text-align:center;
+    max-width:640px;
+    margin:0 auto;
+  }
+  .reviews-empty p{font-size:1rem;}
+
   /* trabajos realizados */
   .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
   @media (max-width:780px){ .gallery-grid{grid-template-columns:1fr;} }
@@ -537,6 +548,25 @@
   .to-top.show{opacity:1;pointer-events:auto;transform:translateY(0);}
   .to-top:hover{background:var(--blue-bright);}
 
+  .faq-shortcut{
+    position:fixed;
+    right:max(20px, env(safe-area-inset-right, 0px));
+    bottom:calc(max(20px, env(safe-area-inset-bottom, 0px)) + 62px);
+    width:46px;height:46px;border-radius:50%;
+    background:var(--navy-fixed);color:#fff;border:none;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-display);font-weight:700;font-size:1.25rem;
+    text-decoration:none;
+    cursor:pointer;
+    box-shadow:0 10px 24px rgba(15,40,80,.25);
+    opacity:0;pointer-events:none;
+    transform:translateY(14px);
+    transition:opacity .25s ease, transform .25s ease, background .2s ease;
+    z-index:45;
+  }
+  .faq-shortcut.show{opacity:1;pointer-events:auto;transform:translateY(0);}
+  .faq-shortcut:hover{background:var(--blue-bright);}
+
   .toast{
     position:fixed;
     left:50%;
@@ -665,6 +695,7 @@
       <li><a href="#trabajos" id="nav-trabajos" data-editable="text">Trabajos</a></li>
       <!-- <li><a href="#combinaciones" id="nav-combinaciones" data-editable="text">Combinaciones</a></li> -->
       <li><a href="#nosotros" id="nav-nosotros" data-editable="text">Por qué nosotros</a></li>
+      <li><a href="#resenas" id="nav-resenas" data-editable="text">Reseñas</a></li>
       <li><a href="#zona" id="nav-zona" data-editable="text">Zona</a></li>
       <li><a href="#preguntas" id="nav-preguntas" data-editable="text">Preguntas</a></li>
     </ul>
@@ -790,6 +821,18 @@
         <p class="eyebrow" id="why-visual-eyebrow" data-editable="text">Nuestro compromiso</p>
         <h3 id="why-visual-h3" data-editable="text">Pintura Profesional. Calidad Garantizada.</h3>
         <p id="why-visual-p" data-editable="text">Así lo decimos en nuestro propio nombre: no entregamos un trabajo hasta que esté a la altura de lo que prometimos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="resenas" style="background:var(--surface);">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow" id="resenas-eyebrow" data-editable="text">Reseñas</p>
+        <h2 id="resenas-h2" data-editable="text">Lo que opinan nuestros clientes</h2>
+      </div>
+      <div class="reviews-empty reveal">
+        <p id="resenas-empty-text" data-editable="text">Todavía no tenemos reseñas publicadas. Si confías en nosotros para tu proyecto, sé de los primeros en contarnos cómo te fue.</p>
       </div>
     </div>
   </section>
@@ -1009,6 +1052,7 @@
         <li><a href="#trabajos" id="footer-nav-trabajos" data-editable="text">Trabajos realizados</a></li>
         <!-- <li><a href="#combinaciones" id="footer-nav-combinaciones" data-editable="text">Combinaciones de color</a></li> -->
         <li><a href="#nosotros" id="footer-nav-nosotros" data-editable="text">Por qué nosotros</a></li>
+        <li><a href="#resenas" id="footer-nav-resenas" data-editable="text">Reseñas</a></li>
         <li><a href="#proceso" id="footer-nav-proceso" data-editable="text">Cómo trabajamos</a></li>
         <li><a href="#zona" id="footer-nav-zona" data-editable="text">Zona de servicio</a></li>
         <li><a href="#preguntas" id="footer-nav-preguntas" data-editable="text">Preguntas frecuentes</a></li>
@@ -1184,6 +1228,7 @@
 <button class="to-top" id="toTop" aria-label="Volver arriba">
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
 </button>
+<a class="faq-shortcut" id="faqShortcut" href="#preguntas" aria-label="Ir a preguntas frecuentes" title="Preguntas frecuentes">?</a>
 
 <div class="toast" id="toast"></div>
 
@@ -1227,11 +1272,13 @@
   // header shadow + back-to-top, batched on rAF to stay smooth while scrolling
   var header = document.querySelector('header');
   var toTop = document.getElementById('toTop');
+  var faqShortcut = document.getElementById('faqShortcut');
   var ticking = false;
   function onScroll(){
     var y = window.scrollY || document.documentElement.scrollTop;
     header.classList.toggle('scrolled', y > 8);
     toTop.classList.toggle('show', y > 480);
+    faqShortcut.classList.toggle('show', y > 480);
     ticking = false;
   }
   window.addEventListener('scroll', function(){
@@ -1493,6 +1540,8 @@
       if (cHeader) cHeader.classList.remove('scrolled');
       var cToTop = clone.querySelector('#toTop');
       if (cToTop) cToTop.classList.remove('show');
+      var cFaqShortcut = clone.querySelector('#faqShortcut');
+      if (cFaqShortcut) cFaqShortcut.classList.remove('show');
       var cNavLinks = clone.querySelector('#navLinks');
       if (cNavLinks) cNavLinks.classList.remove('mobile-open');
       var cNavToggle = clone.querySelector('#navToggle');
