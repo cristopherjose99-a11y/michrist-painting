@@ -551,17 +551,19 @@
   .faq-shortcut{
     position:fixed;
     right:max(20px, env(safe-area-inset-right, 0px));
-    bottom:calc(max(20px, env(safe-area-inset-bottom, 0px)) + 62px);
-    width:48px;height:48px;border-radius:50%;
-    background:var(--amber);color:#1a1200;border:2px solid #fff;
-    display:flex;align-items:center;justify-content:center;
+    bottom:calc(max(20px, env(safe-area-inset-bottom, 0px)) + 60px);
+    display:inline-flex;align-items:center;gap:7px;
+    padding:11px 18px 11px 14px;
+    border-radius:999px;
+    background:var(--navy-fixed);color:#fff;
+    font-family:var(--font-body);font-weight:600;font-size:.85rem;
     text-decoration:none;
-    cursor:pointer;
-    box-shadow:0 12px 26px rgba(245,166,35,.4);
+    box-shadow:0 10px 24px rgba(15,40,80,.25);
     transition:transform .2s ease, background .2s ease, box-shadow .2s ease;
     z-index:46;
   }
-  .faq-shortcut:hover{background:var(--amber-dark);transform:scale(1.06);box-shadow:0 14px 30px rgba(245,166,35,.5);}
+  .faq-shortcut svg{flex:none;}
+  .faq-shortcut:hover{background:var(--blue-bright);transform:translateY(-2px);box-shadow:0 12px 26px rgba(15,40,80,.3);}
 
   .toast{
     position:fixed;
@@ -1225,7 +1227,8 @@
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
 </button>
 <a class="faq-shortcut" id="faqShortcut" href="#preguntas" aria-label="Ir a preguntas frecuentes" title="Preguntas frecuentes">
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><circle cx="12" cy="12" r="9"/><path d="M9.3 9.4a2.7 2.7 0 0 1 5.2 1c0 1.8-2.5 2-2.5 3.8"/><circle cx="12" cy="17.3" r=".6" fill="currentColor" stroke="none"/></svg>
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><circle cx="12" cy="12" r="9"/><path d="M9.3 9.4a2.7 2.7 0 0 1 5.2 1c0 1.8-2.5 2-2.5 3.8"/><circle cx="12" cy="17.3" r=".6" fill="currentColor" stroke="none"/></svg>
+  <span>Dudas</span>
 </a>
 
 <div class="toast" id="toast"></div>
