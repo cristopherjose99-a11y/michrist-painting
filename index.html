@@ -89,7 +89,7 @@
     border-radius:40% 60% 55% 45% / 55% 45% 60% 40%;
     background:currentColor;
   }
-  #svc-eyebrow, #nosotros-eyebrow, #proceso-eyebrow{ color:var(--amber-dark); }
+  #svc-eyebrow, #nosotros-eyebrow, #proceso-eyebrow, #preguntas-eyebrow{ color:var(--amber-dark); }
   section{padding-block:72px;scroll-margin-top:84px;}
   @media (max-width:640px){ section{padding-block:52px;} }
 
@@ -381,6 +381,27 @@
   .step h3{font-size:1rem;color:var(--navy);margin-bottom:6px;}
   .step p{font-size:.9rem;}
 
+  /* preguntas frecuentes */
+  .faq-list{max-width:760px;}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-item:first-child{border-top:1px solid var(--line);}
+  .faq-item summary{
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding:20px 2px;
+    cursor:pointer;
+    list-style:none;
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:1.02rem;
+    color:var(--navy);
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::marker{content:"";}
+  .faq-item summary:focus-visible{outline:2px solid var(--blue-bright);outline-offset:4px;border-radius:6px;}
+  .faq-item .faq-chevron{flex:none;color:var(--blue-bright);transition:transform .2s ease;}
+  .faq-item[open] .faq-chevron{transform:rotate(180deg);}
+  .faq-item p{margin:0;padding:0 2px 20px;font-size:.95rem;max-width:65ch;}
+
   /* zone */
   .zone-card{
     display:flex;
@@ -645,6 +666,7 @@
       <!-- <li><a href="#combinaciones" id="nav-combinaciones" data-editable="text">Combinaciones</a></li> -->
       <li><a href="#nosotros" id="nav-nosotros" data-editable="text">Por qué nosotros</a></li>
       <li><a href="#zona" id="nav-zona" data-editable="text">Zona</a></li>
+      <li><a href="#preguntas" id="nav-preguntas" data-editable="text">Preguntas</a></li>
     </ul>
     <a class="btn btn-primary btn-sm" href="#quoteForm" id="nav-cta" data-editable="text">Pide tu presupuesto</a>
     <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú">
@@ -877,6 +899,41 @@
     </div>
   </section>
 
+  <section id="preguntas">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow" id="preguntas-eyebrow" data-editable="text">Preguntas frecuentes</p>
+        <h2 id="preguntas-h2" data-editable="text">Dudas que nos hacen seguido</h2>
+      </div>
+      <div class="faq-list reveal">
+        <details class="faq-item">
+          <summary><span id="faq1-q" data-editable="text">¿Cuánto cuesta pintar mi casa?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <p id="faq1-a" data-editable="text">No hay un precio fijo: depende del tamaño del espacio y el tipo de acabado. Por eso la visita y el presupuesto son gratis y sin compromiso.</p>
+        </details>
+        <details class="faq-item">
+          <summary><span id="faq2-q" data-editable="text">¿Tengo que mover los muebles yo?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <p id="faq2-a" data-editable="text">Nosotros protegemos y movemos lo necesario dentro del espacio. Si hay algo muy grande o frágil, lo comentamos contigo antes de empezar.</p>
+        </details>
+        <details class="faq-item">
+          <summary><span id="faq3-q" data-editable="text">¿Cuánto tardan en terminar un trabajo?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <p id="faq3-a" data-editable="text">Depende del tamaño y la cantidad de habitaciones. En la visita gratuita te damos un tiempo estimado real, no una cifra al aire.</p>
+        </details>
+        <details class="faq-item">
+          <summary><span id="faq4-q" data-editable="text">¿Qué pasa si el color no queda como esperaba?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <p id="faq4-a" data-editable="text">Revisamos el resultado contigo antes de dar el trabajo por terminado, así que no se queda nada a medias.</p>
+        </details>
+        <details class="faq-item">
+          <summary><span id="faq5-q" data-editable="text">¿En qué zonas trabajan?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <p id="faq5-a" data-editable="text">Barcelona y alrededores. Si no estás seguro de si llegamos a tu zona, escríbenos y lo confirmamos.</p>
+        </details>
+        <details class="faq-item">
+          <summary><span id="faq6-q" data-editable="text">¿Tengo que pagar algo por la visita o el presupuesto?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <p id="faq6-a" data-editable="text">No, la visita y el presupuesto son totalmente gratis, sin ningún compromiso de contratar.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
   <section id="contacto">
     <div class="wrap">
       <div class="section-head reveal">
@@ -954,6 +1011,7 @@
         <li><a href="#nosotros" id="footer-nav-nosotros" data-editable="text">Por qué nosotros</a></li>
         <li><a href="#proceso" id="footer-nav-proceso" data-editable="text">Cómo trabajamos</a></li>
         <li><a href="#zona" id="footer-nav-zona" data-editable="text">Zona de servicio</a></li>
+        <li><a href="#preguntas" id="footer-nav-preguntas" data-editable="text">Preguntas frecuentes</a></li>
       </ul>
     </div>
     <div>
