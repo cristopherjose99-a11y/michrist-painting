@@ -471,6 +471,7 @@
     color:#fff;
   }
   .cta-block textarea{resize:vertical;min-height:70px;}
+  .cta-block input::placeholder, .cta-block textarea::placeholder{color:#8fa6c9;}
   .cta-block input:focus, .cta-block textarea:focus{outline:2px solid var(--amber);outline-offset:1px;}
   .form-note{margin:12px 0 0;font-size:.85rem;min-height:1.2em;}
   .form-note.ok{color:#9ae6b4;}
@@ -930,7 +931,7 @@
           </div>
           <div class="form-row">
             <label for="qf-message" id="qf-message-label" data-editable="text">¿Qué necesitas pintar?</label>
-            <textarea id="qf-message" name="Mensaje" rows="3"></textarea>
+            <textarea id="qf-message" name="Mensaje" rows="3" required placeholder="Ej: el salón, unos 20 m². Si ya tienes una idea de color, cuéntanosla."></textarea>
           </div>
           <button type="submit" class="btn btn-primary" id="qf-submit" style="width:100%;">Solicitar presupuesto</button>
           <p class="form-note" id="qf-status" role="status"></p>
