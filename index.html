@@ -552,20 +552,16 @@
     position:fixed;
     right:max(20px, env(safe-area-inset-right, 0px));
     bottom:calc(max(20px, env(safe-area-inset-bottom, 0px)) + 62px);
-    width:46px;height:46px;border-radius:50%;
-    background:var(--navy-fixed);color:#fff;border:none;
+    width:48px;height:48px;border-radius:50%;
+    background:var(--amber);color:#1a1200;border:2px solid #fff;
     display:flex;align-items:center;justify-content:center;
-    font-family:var(--font-display);font-weight:700;font-size:1.25rem;
     text-decoration:none;
     cursor:pointer;
-    box-shadow:0 10px 24px rgba(15,40,80,.25);
-    opacity:0;pointer-events:none;
-    transform:translateY(14px);
-    transition:opacity .25s ease, transform .25s ease, background .2s ease;
-    z-index:45;
+    box-shadow:0 12px 26px rgba(245,166,35,.4);
+    transition:transform .2s ease, background .2s ease, box-shadow .2s ease;
+    z-index:46;
   }
-  .faq-shortcut.show{opacity:1;pointer-events:auto;transform:translateY(0);}
-  .faq-shortcut:hover{background:var(--blue-bright);}
+  .faq-shortcut:hover{background:var(--amber-dark);transform:scale(1.06);box-shadow:0 14px 30px rgba(245,166,35,.5);}
 
   .toast{
     position:fixed;
@@ -1228,7 +1224,9 @@
 <button class="to-top" id="toTop" aria-label="Volver arriba">
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
 </button>
-<a class="faq-shortcut" id="faqShortcut" href="#preguntas" aria-label="Ir a preguntas frecuentes" title="Preguntas frecuentes">?</a>
+<a class="faq-shortcut" id="faqShortcut" href="#preguntas" aria-label="Ir a preguntas frecuentes" title="Preguntas frecuentes">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><circle cx="12" cy="12" r="9"/><path d="M9.3 9.4a2.7 2.7 0 0 1 5.2 1c0 1.8-2.5 2-2.5 3.8"/><circle cx="12" cy="17.3" r=".6" fill="currentColor" stroke="none"/></svg>
+</a>
 
 <div class="toast" id="toast"></div>
 
@@ -1272,13 +1270,11 @@
   // header shadow + back-to-top, batched on rAF to stay smooth while scrolling
   var header = document.querySelector('header');
   var toTop = document.getElementById('toTop');
-  var faqShortcut = document.getElementById('faqShortcut');
   var ticking = false;
   function onScroll(){
     var y = window.scrollY || document.documentElement.scrollTop;
     header.classList.toggle('scrolled', y > 8);
     toTop.classList.toggle('show', y > 480);
-    faqShortcut.classList.toggle('show', y > 480);
     ticking = false;
   }
   window.addEventListener('scroll', function(){
@@ -1540,8 +1536,6 @@
       if (cHeader) cHeader.classList.remove('scrolled');
       var cToTop = clone.querySelector('#toTop');
       if (cToTop) cToTop.classList.remove('show');
-      var cFaqShortcut = clone.querySelector('#faqShortcut');
-      if (cFaqShortcut) cFaqShortcut.classList.remove('show');
       var cNavLinks = clone.querySelector('#navLinks');
       if (cNavLinks) cNavLinks.classList.remove('mobile-open');
       var cNavToggle = clone.querySelector('#navToggle');
