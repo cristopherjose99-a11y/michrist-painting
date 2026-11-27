@@ -34,22 +34,11 @@
     --font-body: 'Inter', system-ui, sans-serif;
     color-scheme: light;
   }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --navy: #dce8fb;
-      --blue: #8fb9ee;
-      --blue-bright: #5c9bec;
-      --sky: #10233f;
-      --amber: #f5b64d;
-      --amber-dark: #ffcf7a;
-      --bg: #0a1526;
-      --surface: #0f1d33;
-      --ink: #eaf1fc;
-      --ink-soft: #a9bcd8;
-      --line: #1f3356;
-      color-scheme: dark;
-    }
-  }
+  /* Dark mode stays opt-in only (via [data-theme="dark"], not wired to any
+     toggle yet) rather than auto-following the phone: letting the system
+     flip it silently kept breaking contrast on real phones (the hero logo
+     and the quote-form card both went near-invisible), since this page's
+     palette was art-directed for one fixed light look, not designed twice. */
   :root[data-theme="dark"]{
     --navy: #dce8fb;
     --blue: #8fb9ee;
