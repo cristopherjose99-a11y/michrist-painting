@@ -1222,60 +1222,34 @@
     });
   })();
 
-  // quote request form: sends straight from the page via FormSubmit's AJAX
-  // endpoint (no account needed on our side) instead of opening the
-  // visitor's email app, which many people don't know how to use. The
-  // first-ever submission to a given address makes FormSubmit send that
-  // address a one-time "confirm this form" email; every submission after
-  // that is delivered straight through.
+  // quote request form: builds the message and hands it straight to
+  // WhatsApp (wa.me) instead of email or a third-party form relay — no
+  // account, no server, nothing that can go down on our side. The visitor
+  // only has to tap Send once inside WhatsApp itself.
   (function(){
     var form = document.getElementById('quoteForm');
     if (!form) return;
     var status = document.getElementById('qf-status');
-    var submitBtn = document.getElementById('qf-submit');
 
     form.addEventListener('submit', function(e){
       e.preventDefault();
-      var emailEl = document.getElementById('email-text');
-      var to = (emailEl && emailEl.textContent.trim()) || 'michristpainting@gmail.com';
-      var data = {
-        Nombre: document.getElementById('qf-name').value,
-        'Teléfono': document.getElementById('qf-phone').value,
-        'Qué necesita pintar': document.getElementById('qf-message').value,
-        _subject: 'Solicitud de presupuesto — Michrist Painting',
-        _captcha: 'false'
-      };
-      submitBtn.disabled = true;
-      var prevText = submitBtn.textContent;
-      submitBtn.textContent = 'Enviando…';
-      status.textContent = '';
-      status.className = 'form-note';
+      var phoneEl = document.getElementById('phone-text');
+      var digits = ((phoneEl && phoneEl.textContent) || '34645239750').replace(/\D/g, '');
+      if (digits.length === 9) digits = '34' + digits;
 
-      var ctrl = ('AbortController' in window) ? new AbortController() : null;
-      var timedOut = false;
-      var timer = setTimeout(function(){ timedOut = true; if (ctrl) ctrl.abort(); }, 12000);
+      var nombre = document.getElementById('qf-name').value.trim();
+      var telefono = document.getElementById('qf-phone').value.trim();
+      var mensaje = document.getElementById('qf-message').value.trim();
 
-      fetch('https://formsubmit.co/ajax/' + encodeURIComponent(to), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(data),
-        signal: ctrl ? ctrl.signal : undefined
-      }).then(function(res){
-        clearTimeout(timer);
-        if (!res.ok) throw new Error('bad status');
-        return res.json();
-      }).then(function(){
-        form.reset();
-        status.textContent = '¡Listo! Te contactamos pronto.';
-        status.className = 'form-note ok';
-      }).catch(function(){
-        clearTimeout(timer);
-        status.textContent = 'No se pudo enviar. Llámanos o escríbenos directo por correo.';
-        status.className = 'form-note err';
-      }).then(function(){
-        submitBtn.disabled = false;
-        submitBtn.textContent = prevText;
-      });
+      var lines = ['Hola, soy ' + nombre + '.'];
+      if (telefono) lines.push('Mi teléfono: ' + telefono + '.');
+      if (mensaje) lines.push('Necesito pintar: ' + mensaje);
+      lines.push('(Solicitud enviada desde la página web)');
+
+      var url = 'https://wa.me/' + digits + '?text=' + encodeURIComponent(lines.join(' '));
+      status.textContent = 'Te llevamos a WhatsApp…';
+      status.className = 'form-note ok';
+      window.open(url, '_blank');
     });
   })();
 
