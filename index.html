@@ -1242,13 +1242,11 @@
       var telefono = document.getElementById('qf-phone').value.trim();
       var mensaje = document.getElementById('qf-message').value.trim();
 
-      var lines = ['Hola, soy ' + nombre + '.'];
-      if (telefono) lines.push('Mi teléfono: ' + telefono + '.');
-      if (mensaje) lines.push('Necesito pintar: ' + mensaje);
-      lines.push('(Solicitud enviada desde la página web)');
+      var texto = 'Hola, me llamo ' + nombre + ' y quisiera solicitar un presupuesto de pintura' +
+        (mensaje ? ' para ' + mensaje : '') + '. Mi teléfono de contacto es ' + telefono + '.';
 
-      var url = 'https://wa.me/' + digits + '?text=' + encodeURIComponent(lines.join(' '));
-      status.textContent = 'Te llevamos a WhatsApp…';
+      var url = 'https://wa.me/' + digits + '?text=' + encodeURIComponent(texto);
+      status.textContent = '¡Gracias! Te llevamos a WhatsApp para enviar tu solicitud — te responderemos a la mayor brevedad posible.';
       status.className = 'form-note ok';
       window.open(url, '_blank');
     });
