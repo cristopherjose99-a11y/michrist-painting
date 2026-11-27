@@ -1,0 +1,1650 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Michrist Painting</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /*
+    Layout: a single scrolling page. Diagonal "roller stroke" wave dividers
+    between bands echo the paint-roller sweep in the logo. Hero splits
+    headline/CTA (left) from the full logo mark (right), stacking on phone.
+
+    Color: brand navy + sky blue from the wordmark, amber from the roller
+    in the icon mark — amber is the one warm accent, reserved for CTAs.
+
+    Type: Space Grotesk (display, bold, geometric — matches the blocky
+    wordmark) for headings; Inter for everything people read at length.
+  */
+  :root{
+    --navy: #0b2a52;
+    --blue: #1f5fae;
+    --blue-bright: #2f7fe0;
+    --sky: #eaf2fc;
+    --amber: #f5a623;
+    --amber-dark: #c97f0f;
+    --bg: #ffffff;
+    --surface: #f4f7fc;
+    --ink: #0f1f38;
+    --ink-soft: #4a5a74;
+    --line: #dbe4f2;
+    --font-display: 'Space Grotesk', 'Trebuchet MS', sans-serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --navy: #dce8fb;
+      --blue: #8fb9ee;
+      --blue-bright: #5c9bec;
+      --sky: #10233f;
+      --amber: #f5b64d;
+      --amber-dark: #ffcf7a;
+      --bg: #0a1526;
+      --surface: #0f1d33;
+      --ink: #eaf1fc;
+      --ink-soft: #a9bcd8;
+      --line: #1f3356;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --navy: #dce8fb;
+    --blue: #8fb9ee;
+    --blue-bright: #5c9bec;
+    --sky: #10233f;
+    --amber: #f5b64d;
+    --amber-dark: #ffcf7a;
+    --bg: #0a1526;
+    --surface: #0f1d33;
+    --ink: #eaf1fc;
+    --ink-soft: #a9bcd8;
+    --line: #1f3356;
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:var(--font-body);
+    background:var(--bg);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  h1,h2,h3{font-family:var(--font-display);line-height:1.1;margin:0;text-wrap:balance;}
+  p{line-height:1.6;color:var(--ink-soft);margin:0;text-wrap:pretty;}
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding-left:max(20px, env(safe-area-inset-left, 0px));
+    padding-right:max(20px, env(safe-area-inset-right, 0px));
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:var(--font-display);
+    font-size:.92rem;
+    font-weight:600;
+    color:var(--blue-bright);
+  }
+  .eyebrow::before{
+    content:"";
+    width:9px;height:9px;
+    flex:none;
+    border-radius:40% 60% 55% 45% / 55% 45% 60% 40%;
+    background:currentColor;
+  }
+  #svc-eyebrow, #nosotros-eyebrow, #proceso-eyebrow{ color:var(--amber-dark); }
+  section{padding-block:72px;scroll-margin-top:84px;}
+  @media (max-width:640px){ section{padding-block:52px;} }
+
+  /* movement: reveal-on-scroll (visible by default; JS only hides until a viewer first sees it) */
+  .reveal{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);}
+  .reveal.reveal-init{opacity:0;transform:translateY(26px);}
+  .reveal.reveal-visible{opacity:1;transform:translateY(0);}
+
+  /* header */
+  header{
+    position:sticky;
+    top:env(safe-area-inset-top, 0px);
+    z-index:40;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    transition:box-shadow .25s ease;
+  }
+  header.scrolled{box-shadow:0 8px 24px rgba(15,40,80,.10);}
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0 0 auto;
+    height:env(safe-area-inset-top, 0px);
+    z-index:41;
+    background:var(--bg);
+  }
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    padding-block:10px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+  .brand img{height:54px;width:auto;}
+  .nav-links{display:none;gap:28px;list-style:none;margin:0;padding:0;font-size:.92rem;font-weight:500;}
+  .nav-links a{position:relative;text-decoration:none;color:var(--ink-soft);padding-bottom:3px;transition:color .15s;}
+  .nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:2px;background:var(--amber);transition:right .25s ease;}
+  .nav-links a:hover{color:var(--navy);}
+  .nav-links a:hover::after{right:0;}
+  @media (min-width:860px){ .nav-links{display:flex;} }
+  .nav-toggle{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:40px;
+    height:40px;
+    flex:none;
+    border:none;
+    border-radius:8px;
+    background:transparent;
+    color:var(--navy);
+    cursor:pointer;
+  }
+  .nav-toggle:hover{background:var(--surface);}
+  .nav-toggle .icon-close{display:none;}
+  .nav-toggle[aria-expanded="true"] .icon-open{display:none;}
+  .nav-toggle[aria-expanded="true"] .icon-close{display:block;}
+  @media (min-width:860px){ .nav-toggle{display:none;} }
+  @media (max-width:859px){
+    .nav{flex-wrap:wrap;row-gap:10px;}
+    .nav-links.mobile-open{
+      display:flex;
+      position:absolute;
+      top:100%;
+      left:0;
+      right:0;
+      flex-direction:column;
+      gap:0;
+      background:var(--bg);
+      border-bottom:1px solid var(--line);
+      padding:4px max(20px, env(safe-area-inset-left,0px)) 16px;
+      box-shadow:0 16px 28px rgba(15,40,80,.14);
+    }
+    .nav-links.mobile-open a{padding:14px 2px;border-bottom:1px solid var(--line);}
+    .nav-links.mobile-open a:last-child{border-bottom:none;}
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    border-radius:999px;
+    padding:12px 24px;
+    font-family:var(--font-body);
+    font-weight:600;
+    font-size:.92rem;
+    text-decoration:none;
+    border:1.5px solid transparent;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+  }
+  .btn:hover{transform:translateY(-3px);}
+  .btn:active{transform:translateY(-1px);}
+  .btn-primary{background:var(--amber);color:#1a1200;}
+  .btn-primary:hover{background:var(--amber-dark);box-shadow:0 12px 26px rgba(245,166,35,.35);}
+  .btn-ghost{border-color:var(--line);color:var(--navy);background:transparent;}
+  .btn-ghost:hover{border-color:var(--blue-bright);box-shadow:0 10px 22px rgba(15,40,80,.1);}
+  .btn-sm{padding:9px 18px;font-size:.85rem;}
+
+  /* hero */
+  .hero{
+    background:linear-gradient(180deg, var(--sky), var(--bg) 85%);
+    margin-top:calc(-1 * env(safe-area-inset-top, 0px));
+    padding-top:calc(env(safe-area-inset-top, 0px) + 56px);
+    padding-bottom:0;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.15fr 1fr;
+    gap:40px;
+    align-items:center;
+    padding-bottom:48px;
+  }
+  @media (max-width:860px){ .hero-grid{grid-template-columns:1fr;text-align:center;} }
+  .hero h1{font-size:clamp(2rem, 4.4vw, 3.1rem);color:var(--navy);margin-bottom:18px;}
+  .hero p.lead{font-size:1.08rem;max-width:46ch;margin-bottom:28px;}
+  @media (max-width:860px){ .hero p.lead{margin-inline:auto;} }
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;}
+  @media (max-width:860px){ .hero-cta{justify-content:center;} }
+  .hero-badges{
+    display:flex;
+    gap:22px;
+    flex-wrap:wrap;
+    margin-top:34px;
+    padding-top:26px;
+    border-top:1px solid var(--line);
+  }
+  @media (max-width:860px){ .hero-badges{justify-content:center;} }
+  .hero-badge{display:flex;align-items:center;gap:8px;font-size:.85rem;font-weight:600;color:var(--navy);}
+  .hero-badge svg{flex:none;color:var(--blue-bright);}
+  .hero-visual img{filter:drop-shadow(0 18px 34px rgba(15,40,80,.18));animation:floaty 5s ease-in-out infinite;}
+  @keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+  .brush-stroke{display:block;margin:4px 0 2px;overflow:visible;}
+  @media (max-width:860px){ .brush-stroke{margin-inline:auto;} }
+  .brush-stroke path{fill:none;stroke:var(--amber);stroke-width:5;stroke-linecap:round;stroke-dasharray:300;stroke-dashoffset:300;animation:draw 1s ease .2s forwards;}
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  @media (prefers-reduced-motion: reduce){
+    .brush-stroke path{stroke-dashoffset:0;}
+  }
+  .wave{display:block;width:100%;height:auto;color:var(--bg);}
+
+  /* services */
+  .section-head{max-width:60ch;margin-bottom:44px;}
+  .section-head h2{font-size:clamp(1.6rem,3vw,2.1rem);color:var(--navy);margin-top:8px;}
+  .section-head p{margin-top:12px;font-size:1.02rem;}
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  @media (max-width:920px){ .grid-4{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:520px){ .grid-4{grid-template-columns:1fr;} }
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media (max-width:780px){ .grid-3{grid-template-columns:1fr;} }
+  .card{
+    background:var(--bg);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:28px 22px;
+    min-width:0;
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:0 14px 28px rgba(15,40,80,.10);border-color:var(--blue-bright);}
+  .card .icon{
+    width:48px;height:48px;border-radius:12px;
+    background:var(--sky);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--blue);
+    margin-bottom:18px;
+  }
+  .card h3{font-size:1.08rem;color:var(--navy);margin-bottom:8px;}
+  .card p{font-size:.93rem;}
+  .services{background:var(--surface);}
+
+  /* equipo / profesionales */
+  .team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+  @media (max-width:700px){ .team-grid{grid-template-columns:1fr;} }
+  .team-card{position:relative;border-radius:18px;overflow:hidden;box-shadow:0 10px 26px rgba(15,40,80,.1);transition:transform .2s ease, box-shadow .2s ease;}
+  .team-card:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(15,40,80,.16);}
+  .team-card img{display:block;width:100%;height:260px;object-fit:cover;}
+  .team-card .cap{
+    position:absolute;left:0;right:0;bottom:0;
+    padding:16px 18px;
+    background:linear-gradient(0deg, rgba(11,42,82,.85), transparent);
+    color:#fff;font-weight:600;font-size:.95rem;
+  }
+
+  /* trabajos realizados */
+  .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media (max-width:780px){ .gallery-grid{grid-template-columns:1fr;} }
+  .gallery-card{border-radius:16px;overflow:hidden;border:1px solid var(--line);transition:transform .25s ease, box-shadow .25s ease;background:var(--bg);cursor:pointer;}
+  .gallery-card:hover{transform:translateY(-6px);box-shadow:0 18px 34px rgba(15,40,80,.12);}
+  .gallery-card:focus-visible{outline:2px solid var(--blue-bright);outline-offset:3px;}
+  .gallery-card .photo{position:relative;}
+  .gallery-card img{display:block;width:100%;height:200px;object-fit:cover;}
+  .gallery-card .cap{padding:12px 16px 2px;font-size:.88rem;font-weight:600;color:var(--navy);}
+  .gallery-card .view-more{padding:4px 16px 14px;font-size:.8rem;font-weight:600;color:var(--blue);}
+
+  /* combinaciones (lightbox) */
+  .lightbox-overlay{
+    position:fixed;inset:0;
+    background:rgba(11,42,82,.72);
+    display:none;align-items:center;justify-content:center;
+    padding:24px;
+    z-index:80;
+  }
+  .lightbox-overlay.show{display:flex;}
+  .lightbox-box{
+    background:var(--bg);
+    border-radius:20px;
+    max-width:920px;width:100%;
+    max-height:88vh;overflow:auto;
+    padding:30px;
+    position:relative;
+  }
+  .lightbox-box h3{color:var(--navy);font-size:1.3rem;margin-bottom:6px;}
+  .lightbox-box > p{color:var(--ink-soft);margin-bottom:22px;}
+  .lightbox-close{
+    position:absolute;top:16px;right:16px;
+    width:36px;height:36px;border-radius:50%;
+    border:none;background:var(--surface);color:var(--navy);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;transition:background .2s ease;
+  }
+  .lightbox-close:hover{background:var(--line);}
+  .lightbox-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px 16px;}
+  @media (max-width:700px){ .lightbox-grid{grid-template-columns:1fr;} }
+  .lightbox-grid figure{margin:0;}
+  .lightbox-grid figcaption{padding:9px 2px 0;font-size:.85rem;font-weight:600;color:var(--navy);text-align:center;}
+  .wall-mock{display:flex;flex-direction:column;height:140px;border-radius:10px;overflow:hidden;border:1px solid var(--line);cursor:pointer;}
+  .wall-ceiling{flex:none;height:10%;background:#ffffff;}
+  .wall-main{flex:1;}
+  .wall-accent{flex:none;height:34%;}
+  .wall-base{flex:none;height:7%;background:#f1efe9;border-top:2px solid rgba(0,0,0,.08);}
+  .combo-preview-frame{position:relative;width:100%;aspect-ratio:900/599;border-radius:14px;overflow:hidden;background:var(--surface);}
+  .combo-preview-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block;}
+  .preview-tint{position:absolute;inset:0;mix-blend-mode:normal;display:none;}
+  .preview-patch{position:absolute;overflow:hidden;display:none;}
+  .preview-patch img{position:absolute;display:block;max-width:none;max-height:none;}
+
+  /* trabajos realizados: real photos grouped by room */
+  .portfolio-group-title{font-size:1rem;color:var(--navy);margin:0 0 16px;}
+  .portfolio-group-title:not(:first-of-type){margin-top:36px;}
+  .gallery-photo{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);position:relative;transition:transform .2s ease, box-shadow .2s ease;}
+  .gallery-photo:hover{transform:translateY(-4px);box-shadow:0 14px 28px rgba(15,40,80,.10);}
+  .gallery-photo img{display:block;width:100%;height:200px;object-fit:cover;}
+
+  /* why us */
+  .grid-2x2{display:grid;grid-template-columns:repeat(2,1fr);gap:28px 36px;}
+  @media (max-width:640px){ .grid-2x2{grid-template-columns:1fr;} }
+  .why-item{display:flex;gap:16px;}
+  .why-item .icon{
+    flex:none;width:42px;height:42px;border-radius:999px;
+    background:var(--navy);color:var(--amber);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .why-item h3{font-size:1.02rem;color:var(--navy);margin-bottom:4px;}
+  .why-item p{font-size:.93rem;}
+  .why-layout{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+  @media (max-width:860px){ .why-layout{grid-template-columns:1fr;} }
+  .why-visual{
+    background:var(--navy);
+    border-radius:22px;
+    padding:36px;
+    color:var(--sky);
+  }
+  .why-visual .eyebrow{color:var(--amber);}
+  .why-visual h3{color:#fff;font-size:1.3rem;margin:10px 0 14px;}
+  .why-visual p{color:#cfe0f7;}
+
+  /* process */
+  .process{background:var(--surface);}
+  .steps{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;counter-reset:step;}
+  .steps::before{content:"";position:absolute;top:22px;left:8%;right:8%;height:2px;background:var(--line);}
+  @media (max-width:920px){ .steps{grid-template-columns:repeat(2,1fr);} .steps::before{display:none;} }
+  @media (max-width:520px){ .steps{grid-template-columns:1fr;} }
+  .step{position:relative;z-index:1;padding-top:8px;min-width:0;}
+  .step .num{
+    font-family:var(--font-display);
+    font-size:2.2rem;
+    font-weight:700;
+    color:var(--line);
+    -webkit-text-stroke:1.5px var(--blue-bright);
+    color:transparent;
+    display:inline-block;
+    margin-bottom:10px;
+    background:var(--surface);
+    padding-right:10px;
+  }
+  .step h3{font-size:1rem;color:var(--navy);margin-bottom:6px;}
+  .step p{font-size:.9rem;}
+
+  /* zone */
+  .zone-card{
+    display:flex;
+    align-items:center;
+    gap:28px;
+    background:linear-gradient(120deg, var(--navy), var(--blue));
+    border-radius:22px;
+    padding:36px;
+    color:#fff;
+    flex-wrap:wrap;
+  }
+  .zone-card .icon{
+    flex:none;width:64px;height:64px;border-radius:16px;
+    background:rgba(255,255,255,.14);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--amber);
+  }
+  .zone-card h3{color:#fff;font-size:1.25rem;margin-bottom:6px;}
+  .zone-card p{color:#d8e6fa;max-width:48ch;}
+
+  /* contact */
+  .contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
+  @media (max-width:860px){ .contact-layout{grid-template-columns:1fr;} }
+  .contact-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:30px;
+  }
+  .contact-row{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--line);}
+  .contact-row:last-child{border-bottom:none;}
+  .contact-row .icon{flex:none;width:38px;height:38px;border-radius:10px;background:var(--sky);color:var(--blue);display:flex;align-items:center;justify-content:center;}
+  .contact-row .label{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);font-weight:600;}
+  .contact-row .value{font-size:1rem;font-weight:600;color:var(--navy);}
+  .placeholder{color:var(--amber-dark);font-style:italic;font-weight:600;}
+  .pending-note{
+    margin-top:20px;
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    background:color-mix(in srgb, var(--amber) 14%, transparent);
+    border:1px dashed var(--amber-dark);
+    border-radius:12px;
+    padding:14px 16px;
+    font-size:.85rem;
+    color:var(--navy);
+  }
+  .copy-row{display:flex;align-items:center;gap:8px;}
+  .copy-btn{
+    border:1px solid var(--line);
+    background:var(--bg);
+    border-radius:8px;
+    width:30px;height:30px;
+    display:inline-flex;align-items:center;justify-content:center;
+    cursor:pointer;
+    color:var(--ink-soft);
+    flex:none;
+  }
+  .copy-btn:hover{border-color:var(--blue-bright);color:var(--blue-bright);}
+  .cta-block{
+    background:var(--navy);
+    border-radius:20px;
+    padding:36px 30px;
+    color:#fff;
+  }
+  .cta-block h3{color:#fff;font-size:1.4rem;margin-bottom:10px;}
+  .cta-block p{color:#cfe0f7;margin-bottom:24px;}
+
+  footer{background:var(--navy);color:#cfe0f7;padding-block:60px 28px;}
+  .footer-top{
+    display:grid;
+    grid-template-columns:1.3fr 1fr 1fr;
+    gap:40px;
+    padding-bottom:36px;
+    border-bottom:1px solid rgba(255,255,255,.14);
+  }
+  @media (max-width:760px){ .footer-top{grid-template-columns:1fr;text-align:center;gap:36px;} }
+  .footer-brand{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+  @media (max-width:760px){ .footer-brand{justify-content:center;} }
+  .footer-brand img{height:76px;width:auto;}
+  footer .tagline{font-size:1rem;font-weight:600;color:#fff;letter-spacing:.02em;margin-bottom:10px;}
+  .footer-desc{font-size:.9rem;color:#a9bcd8;max-width:34ch;}
+  @media (max-width:760px){ .footer-desc{margin-inline:auto;} }
+  footer h4{
+    font-family:var(--font-display);
+    font-size:.8rem;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:#fff;
+    margin-bottom:18px;
+  }
+  .footer-links{list-style:none;margin:0 0 20px;padding:0;display:flex;flex-direction:column;gap:11px;font-size:.92rem;}
+  .footer-links a{color:#a9bcd8;text-decoration:none;transition:color .15s;}
+  .footer-links a:hover{color:var(--amber);}
+  .footer-links li.muted{color:#a9bcd8;}
+  .footer-links li.placeholder-footer{color:#f5c87a;font-style:italic;}
+  .footer-bottom{text-align:center;padding-top:22px;}
+  footer small{font-size:.8rem;color:#9fb6d8;}
+
+  .to-top{
+    position:fixed;
+    right:max(20px, env(safe-area-inset-right, 0px));
+    bottom:max(20px, env(safe-area-inset-bottom, 0px));
+    width:46px;height:46px;border-radius:50%;
+    background:var(--navy);color:#fff;border:none;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+    box-shadow:0 10px 24px rgba(15,40,80,.25);
+    opacity:0;pointer-events:none;
+    transform:translateY(14px);
+    transition:opacity .25s ease, transform .25s ease, background .2s ease;
+    z-index:45;
+  }
+  .to-top.show{opacity:1;pointer-events:auto;transform:translateY(0);}
+  .to-top:hover{background:var(--blue-bright);}
+
+  .toast{
+    position:fixed;
+    left:50%;
+    bottom:max(24px, env(safe-area-inset-bottom, 0px));
+    transform:translate(-50%, 140%);
+    background:var(--navy);
+    color:#fff;
+    padding:12px 20px;
+    border-radius:999px;
+    font-size:.88rem;
+    font-weight:600;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+    transition:transform .25s ease;
+    z-index:50;
+    white-space:nowrap;
+  }
+  .toast.show{transform:translate(-50%, 0);}
+
+  /* edit mode (owner/editor only) */
+  .edit-toggle{
+    position:fixed;
+    left:max(20px, env(safe-area-inset-left, 0px));
+    bottom:max(20px, env(safe-area-inset-bottom, 0px));
+    width:46px;height:46px;border-radius:50%;
+    background:var(--amber);color:#1a1200;border:none;
+    display:none;align-items:center;justify-content:center;
+    cursor:pointer;
+    box-shadow:0 10px 24px rgba(15,40,80,.25);
+    z-index:45;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .edit-toggle.ready{display:flex;}
+  .edit-toggle:hover{transform:scale(1.06);}
+  .edit-toggle.active{background:var(--navy);color:#fff;}
+  body.edit-mode [data-editable="text"]{
+    outline:1.5px dashed var(--amber-dark);
+    outline-offset:4px;
+    border-radius:4px;
+    cursor:text;
+  }
+  body.edit-mode [data-editable="text"]:focus{outline-color:var(--blue-bright);background:color-mix(in srgb, var(--amber) 10%, transparent);}
+  .photo-edit-btn{
+    display:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    align-items:center;justify-content:center;
+    width:40px;height:40px;border-radius:50%;
+    background:rgba(11,42,82,.82);color:#fff;border:2px solid #fff;
+    cursor:pointer;z-index:5;
+  }
+  body.edit-mode .photo-edit-btn{display:flex;}
+  .photo-edit-btn:hover{background:var(--amber);color:#1a1200;}
+  .edit-bar{
+    position:fixed;left:0;right:0;bottom:0;
+    display:none;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;
+    padding:14px 16px max(14px, env(safe-area-inset-bottom,0px));
+    background:var(--navy);color:#fff;
+    z-index:55;
+    box-shadow:0 -8px 24px rgba(0,0,0,.2);
+  }
+  .edit-bar.show{display:flex;}
+  .edit-bar span{font-size:.88rem;color:#cfe0f7;}
+  .deletable{position:relative;}
+  .deleted-hidden{display:none !important;}
+  .delete-btn{
+    display:none;position:absolute;top:-9px;right:-9px;
+    width:26px;height:26px;border-radius:50%;
+    background:#b3261e;color:#fff;border:2px solid #fff;
+    align-items:center;justify-content:center;
+    cursor:pointer;z-index:6;padding:0;
+    box-shadow:0 2px 6px rgba(0,0,0,.25);
+  }
+  body.edit-mode .delete-btn{display:flex;}
+  .delete-btn:hover{background:#8f1d17;}
+  .trash-toggle{
+    position:relative;
+    background:transparent;border:1px solid rgba(255,255,255,.4);color:#fff;
+    border-radius:999px;padding:9px 16px;font-size:.85rem;font-weight:600;
+    cursor:pointer;font-family:var(--font-body);
+  }
+  .trash-toggle:hover{border-color:#fff;}
+  .trash-panel{
+    display:none;
+    position:fixed;left:50%;bottom:76px;transform:translateX(-50%);
+    width:min(420px, calc(100vw - 32px));
+    max-height:50vh;overflow:auto;
+    background:var(--bg);color:var(--ink);
+    border-radius:16px;
+    box-shadow:0 20px 50px rgba(0,0,0,.3);
+    padding:16px;
+    z-index:56;
+  }
+  .trash-panel.show{display:block;}
+  .trash-panel h4{margin:0 0 10px;font-family:var(--font-display);font-size:.9rem;color:var(--navy);}
+  .trash-empty{font-size:.85rem;color:var(--ink-soft);}
+  .trash-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);}
+  .trash-item:last-child{border-bottom:none;}
+  .trash-item span{font-size:.85rem;color:var(--ink);}
+  .add-photo-btn{
+    display:none;
+    flex-direction:column;align-items:center;justify-content:center;gap:8px;
+    border:2px dashed var(--line);border-radius:16px;
+    background:transparent;color:var(--blue);
+    font-family:var(--font-body);font-weight:600;font-size:.85rem;
+    cursor:pointer;min-height:200px;width:100%;
+    transition:border-color .2s ease, color .2s ease, background .2s ease;
+  }
+  body.edit-mode .add-photo-btn{display:flex;}
+  .add-photo-btn:hover{border-color:var(--blue-bright);color:var(--blue-bright);background:var(--sky);}
+  .team-grid .add-photo-btn{min-height:260px;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;animation:none !important;}
+  }
+</style>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#inicio">
+      <img id="img-logo-header" data-editable="image" src="logo-header-blue.png" alt="Michrist Painting">
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#servicios" id="nav-servicios" data-editable="text">Servicios</a></li>
+      <li><a href="#equipo" id="nav-equipo" data-editable="text">Profesionales</a></li>
+      <li><a href="#trabajos" id="nav-trabajos" data-editable="text">Trabajos</a></li>
+      <!-- <li><a href="#combinaciones" id="nav-combinaciones" data-editable="text">Combinaciones</a></li> -->
+      <li><a href="#nosotros" id="nav-nosotros" data-editable="text">Por qué nosotros</a></li>
+      <li><a href="#zona" id="nav-zona" data-editable="text">Zona</a></li>
+    </ul>
+    <a class="btn btn-primary btn-sm" href="#contacto" id="nav-cta" data-editable="text">Pide tu presupuesto</a>
+    <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú">
+      <svg class="icon-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="inicio">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow" id="hero-eyebrow" data-editable="text">Pintura profesional en Barcelona</p>
+        <h1 id="hero-title" data-editable="text">Dale a tu hogar el acabado que se merece</h1>
+        <svg class="brush-stroke" viewBox="0 0 220 20" width="170" height="16" aria-hidden="true">
+          <path d="M4 14 C 40 2, 80 20, 120 8 S 200 2, 216 10"/>
+        </svg>
+        <p class="lead" id="hero-lead" data-editable="text">Pintamos interiores y acabados decorativos con materiales de calidad y un trabajo limpio y cuidadoso. Presupuesto gratis, sin compromiso.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#contacto" id="hero-cta-primary" data-editable="text">Pide tu presupuesto gratis</a>
+          <a class="btn btn-ghost" href="#servicios" id="hero-cta-ghost" data-editable="text">Ver servicios</a>
+        </div>
+        <div class="hero-badges">
+          <span class="hero-badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg> <span id="hero-badge-1" data-editable="text">Presupuesto gratuito</span></span>
+          <span class="hero-badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg> <span id="hero-badge-2" data-editable="text">Trabajo limpio y cuidadoso</span></span>
+          <span class="hero-badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg> <span id="hero-badge-3" data-editable="text">Calidad garantizada</span></span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img id="img-logo-hero" data-editable="image" src="logo-hero-v2.png" alt="Michrist Painting — Pintura Profesional, Calidad Garantizada">
+      </div>
+    </div>
+    <svg class="wave" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="currentColor" d="M0,40 C250,90 450,0 700,30 C900,54 1050,10 1200,35 L1200,80 L0,80 Z"/>
+    </svg>
+  </section>
+
+  <section class="services" id="servicios">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow" id="svc-eyebrow" data-editable="text">Servicios</p>
+        <h2 id="svc-h2" data-editable="text">Todo lo que tu espacio necesita</h2>
+        <p id="svc-intro" data-editable="text">De una habitación a la casa completa: nos encargamos de la preparación, la pintura y la limpieza final.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card reveal deletable">
+          <div class="icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-9"/><path d="M9 20v-6h6v6"/></svg>
+          </div>
+          <h3 id="svc1-title" data-editable="text">Pintura de Viviendas</h3>
+          <p id="svc1-desc" data-editable="text">Interiores con acabados duraderos, cuidando cada rincón de tu casa.</p>
+        </div>
+        <div class="card reveal deletable">
+          <div class="icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11 18 2l3 3-9 9-4 1z"/><path d="M13 6 3.5 15.5a3 3 0 0 0 0 4.24 3 3 0 0 0 4.24 0L17 10"/></svg>
+          </div>
+          <h3 id="svc2-title" data-editable="text">Decoración</h3>
+          <p id="svc2-desc" data-editable="text">Combinaciones de color y texturas decorativas que dan personalidad a cada espacio.</p>
+        </div>
+        <div class="card reveal deletable">
+          <div class="icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 4 6v6c0 5 3.4 8.5 8 9 4.6-.5 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <h3 id="svc3-title" data-editable="text">Trabajo Limpio y Confiable</h3>
+          <p id="svc3-desc" data-editable="text">Protegemos muebles y suelos, y dejamos el espacio tan limpio como lo encontramos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="equipo">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow" id="equipo-eyebrow" data-editable="text">Profesionales</p>
+        <h2 id="equipo-h2" data-editable="text">Manos con oficio en cada trabajo</h2>
+        <p id="equipo-lead" data-editable="text">Cuidamos cada detalle, desde la preparación de la superficie hasta el último repaso antes de irnos.</p>
+      </div>
+      <div class="team-grid" id="equipoGrid">
+        <div class="team-card reveal deletable">
+          <img id="img-equipo-1" data-editable="image" src="foto-equipo-1.jpg" alt="Aplicando pintura con rodillo sobre una pared">
+          <div class="cap" id="equipo-cap-1" data-editable="text">Aplicación con rodillo</div>
+        </div>
+        <div class="team-card reveal deletable">
+          <img id="img-equipo-2" data-editable="image" src="foto-equipo-2.jpg" alt="Trabajo de acabado con herramientas">
+          <div class="cap" id="equipo-cap-2" data-editable="text">Acabados con cuidado al detalle</div>
+        </div>
+        <button type="button" class="add-photo-btn" data-add-target="equipoGrid" data-add-type="team-card">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+          Añadir foto
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section id="nosotros">
+    <div class="wrap why-layout">
+      <div>
+        <p class="eyebrow" id="nosotros-eyebrow" data-editable="text">Por qué elegirnos</p>
+        <h2 id="nosotros-h2" data-editable="text" style="font-size:clamp(1.6rem,3vw,2.1rem);color:var(--navy);margin:8px 0 28px;">Un trabajo cuidado, de principio a fin</h2>
+        <div class="grid-2x2">
+          <div class="why-item reveal deletable">
+            <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20.59 13.41 11 3.83A2 2 0 0 0 9.58 3H4a1 1 0 0 0-1 1v5.57a2 2 0 0 0 .59 1.42l9.58 9.59a2 2 0 0 0 2.83 0l4.59-4.59a2 2 0 0 0 0-2.58Z"/><circle cx="7.5" cy="7.5" r="1.1" fill="currentColor" stroke="none"/></svg></div>
+            <div><h3 id="why1-title" data-editable="text">Presupuesto sin compromiso</h3><p id="why1-desc" data-editable="text">Vemos el espacio y te damos un precio claro antes de empezar.</p></div>
+          </div>
+          <div class="why-item reveal deletable">
+            <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2s-6 7.1-6 11.3A6 6 0 0 0 12 21a6 6 0 0 0 6-7.7C18 9.1 12 2 12 2Z"/></svg></div>
+            <div><h3 id="why2-title" data-editable="text">Materiales de calidad</h3><p id="why2-desc" data-editable="text">Pinturas y acabados pensados para durar, no solo para lucir bien el primer día.</p></div>
+          </div>
+          <div class="why-item reveal deletable">
+            <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg></div>
+            <div><h3 id="why3-title" data-editable="text">Puntualidad</h3><p id="why3-desc" data-editable="text">Llegamos cuando decimos que vamos a llegar, y avisamos si algo cambia.</p></div>
+          </div>
+          <div class="why-item reveal deletable">
+            <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8.5" r="5"/><path d="m8.3 13 -1.1 7.5 4.8-2.6 4.8 2.6-1.1-7.5"/></svg></div>
+            <div><h3 id="why4-title" data-editable="text">Garantía de satisfacción</h3><p id="why4-desc" data-editable="text">Revisamos el resultado contigo antes de dar el trabajo por terminado.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="why-visual reveal">
+        <p class="eyebrow" id="why-visual-eyebrow" data-editable="text">Nuestro compromiso</p>
+        <h3 id="why-visual-h3" data-editable="text">Pintura Profesional. Calidad Garantizada.</h3>
+        <p id="why-visual-p" data-editable="text">Así lo decimos en nuestro propio nombre: no entregamos un trabajo hasta que esté a la altura de lo que prometimos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="trabajos">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow" id="trabajos-eyebrow" data-editable="text">Trabajos realizados</p>
+        <h2 id="trabajos-h2" data-editable="text">Así dejamos los espacios</h2>
+        <p id="trabajos-lead" data-editable="text">Fotos reales del tipo de acabado que buscamos en cada proyecto.</p>
+      </div>
+
+      <h3 class="portfolio-group-title" id="trabajos-group-comedor" data-editable="text">Comedor · Interior</h3>
+      <div class="gallery-grid" id="grid-comedor">
+        <figure class="gallery-photo deletable"><img id="img-portfolio-comedor-1" data-editable="image" src="foto-real-comedor-1.jpg" alt="Comedor pintado"></figure>
+        <figure class="gallery-photo deletable"><img id="img-portfolio-comedor-2" data-editable="image" src="foto-real-comedor-2.jpg" alt="Comedor pintado"></figure>
+        <figure class="gallery-photo deletable"><img id="img-portfolio-comedor-3" data-editable="image" src="foto-empty-comedor-2.jpg" alt="Comedor pintado"></figure>
+        <button type="button" class="add-photo-btn" data-add-target="grid-comedor" data-add-type="gallery-photo">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+          Añadir foto
+        </button>
+      </div>
+
+      <h3 class="portfolio-group-title" id="trabajos-group-salon" data-editable="text">Salón · Interior</h3>
+      <div class="gallery-grid" id="grid-salon">
+        <figure class="gallery-photo deletable"><img id="img-portfolio-salon-1" data-editable="image" src="foto-real-salon-1.jpg" alt="Salón pintado"></figure>
+        <figure class="gallery-photo deletable"><img id="img-portfolio-salon-2" data-editable="image" src="foto-real-salon-2.jpg" alt="Salón pintado"></figure>
+        <figure class="gallery-photo deletable"><img id="img-portfolio-salon-3" data-editable="image" src="foto-empty-salon-1.jpg" alt="Salón pintado"></figure>
+        <button type="button" class="add-photo-btn" data-add-target="grid-salon" data-add-type="gallery-photo">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+          Añadir foto
+        </button>
+      </div>
+
+      <h3 class="portfolio-group-title" id="trabajos-group-dormitorio" data-editable="text">Dormitorio · Interior</h3>
+      <div class="gallery-grid" id="grid-dormitorio">
+        <figure class="gallery-photo deletable"><img id="img-portfolio-dormitorio-1" data-editable="image" src="foto-real-dormitorio-1.jpg" alt="Dormitorio pintado"></figure>
+        <figure class="gallery-photo deletable"><img id="img-portfolio-dormitorio-2" data-editable="image" src="foto-empty-dormitorio-2.jpg" alt="Dormitorio pintado"></figure>
+        <figure class="gallery-photo deletable"><img id="img-portfolio-dormitorio-3" data-editable="image" src="foto-empty-dormitorio-3.jpg" alt="Dormitorio pintado"></figure>
+        <button type="button" class="add-photo-btn" data-add-target="grid-dormitorio" data-add-type="gallery-photo">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+          Añadir foto
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección "Combinaciones" oculta a pedido de Cristopher (27/11/2026): la
+       quitó de la vista pero la deja aquí para añadirla él mismo a mano más
+       adelante. Para reactivarla: quitar este comentario y el de abajo (las
+       dos ventanas emergentes y el script al final del archivo), y descomentar
+       los dos enlaces "Combinaciones" del menú y del pie de página.
+  <section id="combinaciones" style="background:var(--surface);">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow" id="combinaciones-eyebrow" data-editable="text">Combinaciones</p>
+        <h2 id="combinaciones-h2" data-editable="text">Elige tu espacio y descubre más opciones</h2>
+        <p id="combinaciones-lead" data-editable="text">Entra a cada ambiente y mira varias combinaciones de pintura aplicadas.</p>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-card reveal deletable" data-modal="modal-comedor" role="button" tabindex="0">
+          <div class="photo"><img id="img-trabajo-1" data-editable="image" src="foto-trabajo-1.jpg" alt="Comedor con paredes pintadas"></div>
+          <div class="cap" id="trabajo-cap-1" data-editable="text">Comedor · Interior</div>
+          <div class="view-more" id="trabajo-viewmore-1" data-editable="text">Ver combinaciones de color →</div>
+        </div>
+        <div class="gallery-card reveal deletable" data-modal="modal-salon" role="button" tabindex="0">
+          <div class="photo"><img id="img-trabajo-2" data-editable="image" src="foto-trabajo-2.jpg" alt="Salón con paredes pintadas"></div>
+          <div class="cap" id="trabajo-cap-2" data-editable="text">Salón · Interior</div>
+          <div class="view-more" id="trabajo-viewmore-2" data-editable="text">Ver combinaciones de color →</div>
+        </div>
+        <div class="gallery-card reveal deletable" data-modal="modal-dormitorio" role="button" tabindex="0">
+          <div class="photo"><img id="img-trabajo-3" data-editable="image" src="foto-trabajo-3.jpg" alt="Dormitorio con paredes pintadas"></div>
+          <div class="cap" id="trabajo-cap-3" data-editable="text">Dormitorio · Interior</div>
+          <div class="view-more" id="trabajo-viewmore-3" data-editable="text">Ver combinaciones de color →</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <section class="process" id="proceso">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow" id="proceso-eyebrow" data-editable="text">Cómo trabajamos</p>
+        <h2 id="proceso-h2" data-editable="text">Cuatro pasos, sin sorpresas</h2>
+      </div>
+      <div class="steps">
+        <div class="step reveal deletable"><span class="num">01</span><h3 id="step1-title" data-editable="text">Contacto</h3><p id="step1-desc" data-editable="text">Nos cuentas qué quieres pintar y dónde.</p></div>
+        <div class="step reveal deletable"><span class="num">02</span><h3 id="step2-title" data-editable="text">Visita y presupuesto</h3><p id="step2-desc" data-editable="text">Vemos el espacio y te damos un precio gratuito, sin compromiso.</p></div>
+        <div class="step reveal deletable"><span class="num">03</span><h3 id="step3-title" data-editable="text">Pintamos</h3><p id="step3-desc" data-editable="text">Preparamos la superficie y aplicamos con cuidado y materiales de calidad.</p></div>
+        <div class="step reveal deletable"><span class="num">04</span><h3 id="step4-title" data-editable="text">Revisión final</h3><p id="step4-desc" data-editable="text">Repasamos juntos el resultado antes de darlo por terminado.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="zona">
+    <div class="wrap">
+      <div class="zone-card reveal">
+        <div class="icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-7.4 7-12.5A7 7 0 0 0 5 9.5C5 14.6 12 22 12 22Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+        </div>
+        <div>
+          <h3 id="zona-h3" data-editable="text">Trabajamos en Barcelona y alrededores</h3>
+          <p id="zona-p" data-editable="text">Si tu vivienda, comunidad o local está en Barcelona o cerca, podemos pasar a verlo y darte un presupuesto.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow" id="contacto-eyebrow" data-editable="text">Contacto</p>
+        <h2 id="contacto-h2" data-editable="text">Cuéntanos qué necesitas pintar</h2>
+      </div>
+      <div class="contact-layout">
+        <div class="contact-card reveal">
+          <div class="contact-row deletable">
+            <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.4 2.1L8 9.9a16 16 0 0 0 6 6l1.4-1.4a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.8 2Z"/></svg></div>
+            <div>
+              <div class="label" id="label-phone" data-editable="text">Teléfono</div>
+              <div class="value copy-row"><span class="" id="phone-text" data-editable="text" data-sync="phone">(+34) 645239750</span></div>
+            </div>
+          </div>
+          <div class="contact-row deletable">
+            <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div>
+            <div>
+              <div class="label" id="label-email" data-editable="text">Correo</div>
+              <div class="value copy-row"><a href="mailto:michristpainting@gmail.com" id="email-text" data-editable="text" data-sync="email" data-sync-href="email">michristpainting@gmail.com</a></div>
+            </div>
+          </div>
+          <div class="contact-row deletable">
+            <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-7.4 7-12.5A7 7 0 0 0 5 9.5C5 14.6 12 22 12 22Z"/><circle cx="12" cy="9.5" r="2.5"/></svg></div>
+            <div>
+              <div class="label" id="label-zona" data-editable="text">Zona de servicio</div>
+              <div class="value" id="contacto-zona" data-editable="text">Barcelona y alrededores</div>
+            </div>
+          </div>
+          <div class="pending-note deletable deleted-hidden">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex:none;margin-top:2px;"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+            <span id="pending-note-text" data-editable="text">Falta el teléfono real — pídele a Claude que lo actualice, o edita este bloque directamente, antes de compartir la página.</span>
+          </div>
+        </div>
+        <div class="cta-block reveal">
+          <h3 id="cta-h3" data-editable="text">¿Listo para darle color a tu espacio?</h3>
+          <p id="cta-p" data-editable="text">Escríbenos y te respondemos con un presupuesto gratuito, sin compromiso.</p>
+          <a class="btn btn-primary" href="mailto:michristpainting@gmail.com?subject=Solicitud%20de%20presupuesto" id="cta-btn" data-editable="text" data-sync-href="email" style="width:100%;">Solicitar presupuesto</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-top">
+    <div>
+      <div class="footer-brand">
+        <img id="img-logo-footer" data-editable="image" src="logo-footer-white.png" alt="Michrist Painting">
+      </div>
+      <p class="tagline" id="footer-tagline" data-editable="text">Pintura Profesional · Calidad Garantizada</p>
+      <p class="footer-desc" id="footer-desc" data-editable="text">Pintura de interiores y acabados decorativos en Barcelona, con un trabajo limpio y cuidado de principio a fin.</p>
+    </div>
+    <div>
+      <h4 id="footer-h4-links" data-editable="text">Enlaces</h4>
+      <ul class="footer-links">
+        <li><a href="#inicio" id="footer-nav-inicio" data-editable="text">Inicio</a></li>
+        <li><a href="#servicios" id="footer-nav-servicios" data-editable="text">Servicios</a></li>
+        <li><a href="#equipo" id="footer-nav-equipo" data-editable="text">Profesionales</a></li>
+        <li><a href="#trabajos" id="footer-nav-trabajos" data-editable="text">Trabajos realizados</a></li>
+        <!-- <li><a href="#combinaciones" id="footer-nav-combinaciones" data-editable="text">Combinaciones de color</a></li> -->
+        <li><a href="#nosotros" id="footer-nav-nosotros" data-editable="text">Por qué nosotros</a></li>
+        <li><a href="#proceso" id="footer-nav-proceso" data-editable="text">Cómo trabajamos</a></li>
+        <li><a href="#zona" id="footer-nav-zona" data-editable="text">Zona de servicio</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 id="footer-h4-contacto" data-editable="text">Contacto</h4>
+      <ul class="footer-links">
+        <li class="muted" id="footer-zona-text" data-editable="text">Barcelona y alrededores</li>
+        <li class="" id="footer-phone-text" data-editable="text" data-sync="phone">(+34) 645239750</li>
+        <li><a href="mailto:michristpainting@gmail.com" id="footer-email-text" data-editable="text" data-sync="email" data-sync-href="email">michristpainting@gmail.com</a></li>
+      </ul>
+      <a class="btn btn-primary btn-sm" href="#contacto" id="footer-cta" data-editable="text">Pide tu presupuesto</a>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <small id="footer-copyright" data-editable="text">&copy; 2026 Michrist Painting — Barcelona</small>
+  </div>
+</footer>
+
+<!-- Ventanas emergentes de "Combinaciones" ocultas junto con la sección de arriba (27/11/2026) -- mismo motivo, quedan aquí para cuando Cristopher quiera añadirlas él mismo.
+<div class="lightbox-overlay" id="modal-comedor" aria-hidden="true">
+  <div class="lightbox-box" role="dialog" aria-modal="true" aria-labelledby="modal-comedor-title">
+    <button class="lightbox-close" type="button" data-close-modal aria-label="Cerrar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <h3 id="modal-comedor-title" data-editable="text">Ideas de pintura para tu comedor</h3>
+    <p id="modal-comedor-intro" data-editable="text">Veinticuatro combinaciones de pintura para paredes — así quedaría cada una.</p>
+    <div class="lightbox-grid">
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#1f3a5f"></div><div class="wall-accent" style="background:#c9a227"></div><div class="wall-base"></div></div><figcaption id="cap-combo-comedor-1" data-editable="text">Azul profundo + dorado</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#2f4a3c"></div><div class="wall-accent" style="background:#8a6a43"></div><div class="wall-base"></div></div><figcaption id="cap-combo-comedor-2" data-editable="text">Verde botella + madera</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#c1684f"></div><div class="wall-accent" style="background:#3a3a3a"></div><div class="wall-base"></div></div><figcaption id="cap-combo-comedor-3" data-editable="text">Terracota + grafito</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#8a8378"></div><div class="wall-accent" style="background:#2b2b2b"></div><div class="wall-base"></div></div><figcaption id="cap-combo-comedor-4" data-editable="text">Gris cálido + negro</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#6e2a35"></div><div class="wall-accent" style="background:#caa06b"></div><div class="wall-base"></div></div><figcaption id="cap-combo-comedor-5" data-editable="text">Burdeos + mostaza</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#395066"></div><div class="wall-accent" style="background:#d9a441"></div><div class="wall-base"></div></div><figcaption id="cap-combo-comedor-6" data-editable="text">Azul pizarra + mostaza</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#f2efe9"></div><div class="wall-base"></div></div><figcaption id="cap-combo-comedor-7" data-editable="text">Blanco roto (un solo color)</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#9cae92"></div><div class="wall-base"></div></div><figcaption id="cap-combo-comedor-8" data-editable="text">Verde salvia (un solo color)</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#d8c3a5"></div><div class="wall-base"></div></div><figcaption id="cap-combo-comedor-9" data-editable="text">Arena cálida (un solo color)</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#d9a441"></div><div class="wall-accent" style="background:#3a3a3a"></div><div class="wall-base"></div></div><figcaption id="cap-combo-comedor-10" data-editable="text">Mostaza + gris oscuro</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#1f4a52"></div><div class="wall-accent" style="background:#f3ead9"></div><div class="wall-base"></div></div><figcaption id="cap-combo-comedor-11" data-editable="text">Azul petróleo + crema</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#d98060"></div><div class="wall-accent" style="background:#f2efe9"></div><div class="wall-base"></div></div><figcaption id="cap-combo-comedor-12" data-editable="text">Coral + blanco roto</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#6b7a4a"></div><div class="wall-base"></div></div><figcaption id="cap-combo-comedor-13" data-editable="text">Verde oliva (un solo color)</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#6fa3c7"></div><div class="wall-accent" style="background:#ffffff"></div><div class="wall-base"></div></div><figcaption id="cap-combo-comedor-14" data-editable="text">Azul cielo + blanco</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#4a3528"></div><div class="wall-accent" style="background:#d8c3a5"></div><div class="wall-base"></div></div><figcaption id="cap-combo-comedor-15" data-editable="text">Chocolate + beige</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#9fc9b9"></div><div class="wall-accent" style="background:#ffffff"></div><div class="wall-base"></div></div><figcaption id="cap-combo-comedor-16" data-editable="text">Verde menta + blanco</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#9a948a"></div><div class="wall-base"></div></div><figcaption id="cap-combo-comedor-17" data-editable="text">Gris piedra (un solo color)</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#2f3b63"></div><div class="wall-accent" style="background:#f3ead9"></div><div class="wall-base"></div></div><figcaption id="cap-combo-comedor-18" data-editable="text">Azul índigo + crema</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#c9703f"></div><div class="wall-accent" style="background:#1f1f1f"></div><div class="wall-base"></div></div><figcaption id="cap-combo-comedor-19" data-editable="text">Naranja terracota + negro</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#2f4a3c"></div><div class="wall-base"></div></div><figcaption id="cap-combo-comedor-20" data-editable="text">Verde botella (un solo color)</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#c9a3a0"></div><div class="wall-accent" style="background:#8a8378"></div><div class="wall-base"></div></div><figcaption id="cap-combo-comedor-21" data-editable="text">Rosa palo + gris</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#d9a441"></div><div class="wall-base"></div></div><figcaption id="cap-combo-comedor-22" data-editable="text">Amarillo mostaza (un solo color)</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#1d3b63"></div><div class="wall-accent" style="background:#f2efe9"></div><div class="wall-base"></div></div><figcaption id="cap-combo-comedor-23" data-editable="text">Azul marino + blanco roto</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#5a4636"></div><div class="wall-accent" style="background:#f3ead9"></div><div class="wall-base"></div></div><figcaption id="cap-combo-comedor-24" data-editable="text">Café + crema</figcaption></figure>
+    </div>
+  </div>
+</div>
+
+<div class="lightbox-overlay" id="modal-salon" aria-hidden="true">
+  <div class="lightbox-box" role="dialog" aria-modal="true" aria-labelledby="modal-salon-title">
+    <button class="lightbox-close" type="button" data-close-modal aria-label="Cerrar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <h3 id="modal-salon-title" data-editable="text">Ideas de pintura para tu salón</h3>
+    <p id="modal-salon-intro" data-editable="text">Veinticuatro combinaciones de pintura para paredes — así quedaría cada una.</p>
+    <div class="lightbox-grid">
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#8a8f99"></div><div class="wall-accent" style="background:#b08d57"></div><div class="wall-base"></div></div><figcaption id="cap-combo-salon-1" data-editable="text">Gris suave + madera</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#1d3b63"></div><div class="wall-accent" style="background:#c6a35a"></div><div class="wall-base"></div></div><figcaption id="cap-combo-salon-2" data-editable="text">Azul marino + dorado</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#788c6f"></div><div class="wall-accent" style="background:#6b4a30"></div><div class="wall-base"></div></div><figcaption id="cap-combo-salon-3" data-editable="text">Verde salvia + madera</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#d8c3a5"></div><div class="wall-accent" style="background:#c1684f"></div><div class="wall-base"></div></div><figcaption id="cap-combo-salon-4" data-editable="text">Arena + terracota</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#f5f2ec"></div><div class="wall-accent" style="background:#1c1c1c"></div><div class="wall-base"></div></div><figcaption id="cap-combo-salon-5" data-editable="text">Blanco cálido + negro mate</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#5c6b48"></div><div class="wall-accent" style="background:#f1ead9"></div><div class="wall-base"></div></div><figcaption id="cap-combo-salon-6" data-editable="text">Verde oliva + crema</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#5c7085"></div><div class="wall-base"></div></div><figcaption id="cap-combo-salon-7" data-editable="text">Azul grisáceo (un solo color)</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#ddcdb3"></div><div class="wall-base"></div></div><figcaption id="cap-combo-salon-8" data-editable="text">Beige cálido (un solo color)</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#7c9a82"></div><div class="wall-base"></div></div><figcaption id="cap-combo-salon-9" data-editable="text">Verde eucalipto (un solo color)</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#2f4a3c"></div><div class="wall-accent" style="background:#f3ead9"></div><div class="wall-base"></div></div><figcaption id="cap-combo-salon-10" data-editable="text">Verde bosque + crema</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#c1684f"></div><div class="wall-accent" style="background:#8a8f99"></div><div class="wall-base"></div></div><figcaption id="cap-combo-salon-11" data-editable="text">Terracota + gris</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#1a2b4a"></div><div class="wall-base"></div></div><figcaption id="cap-combo-salon-12" data-editable="text">Azul noche (un solo color)</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#d9a8a0"></div><div class="wall-accent" style="background:#ffffff"></div><div class="wall-base"></div></div><figcaption id="cap-combo-salon-13" data-editable="text">Rosa empolvado + blanco</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#d9a441"></div><div class="wall-accent" style="background:#3a3a3a"></div><div class="wall-base"></div></div><figcaption id="cap-combo-salon-14" data-editable="text">Mostaza + gris oscuro</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#a39b7c"></div><div class="wall-base"></div></div><figcaption id="cap-combo-salon-15" data-editable="text">Caqui (un solo color)</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#9fc9b9"></div><div class="wall-accent" style="background:#8a8f99"></div><div class="wall-base"></div></div><figcaption id="cap-combo-salon-16" data-editable="text">Verde menta + gris</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#1f4a52"></div><div class="wall-base"></div></div><figcaption id="cap-combo-salon-17" data-editable="text">Azul petróleo (un solo color)</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#c1684f"></div><div class="wall-base"></div></div><figcaption id="cap-combo-salon-18" data-editable="text">Terracota (un solo color)</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#d9d6d0"></div><div class="wall-accent" style="background:#1c1c1c"></div><div class="wall-base"></div></div><figcaption id="cap-combo-salon-19" data-editable="text">Gris perla + negro</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#9cae92"></div><div class="wall-accent" style="background:#f1ead9"></div><div class="wall-base"></div></div><figcaption id="cap-combo-salon-20" data-editable="text">Verde salvia + crema</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#d9a441"></div><div class="wall-base"></div></div><figcaption id="cap-combo-salon-21" data-editable="text">Mostaza (un solo color)</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#5c7085"></div><div class="wall-accent" style="background:#ffffff"></div><div class="wall-base"></div></div><figcaption id="cap-combo-salon-22" data-editable="text">Azul grisáceo + blanco</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#6e2a35"></div><div class="wall-base"></div></div><figcaption id="cap-combo-salon-23" data-editable="text">Burdeos (un solo color)</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#ddcdb3"></div><div class="wall-accent" style="background:#5a4636"></div><div class="wall-base"></div></div><figcaption id="cap-combo-salon-24" data-editable="text">Beige + marrón</figcaption></figure>
+    </div>
+  </div>
+</div>
+
+<div class="lightbox-overlay" id="modal-dormitorio" aria-hidden="true">
+  <div class="lightbox-box" role="dialog" aria-modal="true" aria-labelledby="modal-dormitorio-title">
+    <button class="lightbox-close" type="button" data-close-modal aria-label="Cerrar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <h3 id="modal-dormitorio-title" data-editable="text">Ideas de pintura para tu dormitorio</h3>
+    <p id="modal-dormitorio-intro" data-editable="text">Veinticuatro combinaciones de pintura para paredes — así quedaría cada una.</p>
+    <div class="lightbox-grid">
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#2c3e60"></div><div class="wall-accent" style="background:#d98e73"></div><div class="wall-base"></div></div><figcaption id="cap-combo-dormitorio-1" data-editable="text">Azul + terracota</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#e9ddc8"></div><div class="wall-accent" style="background:#c1684f"></div><div class="wall-base"></div></div><figcaption id="cap-combo-dormitorio-2" data-editable="text">Crema + terracota</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#9a9a9a"></div><div class="wall-accent" style="background:#2e2e2e"></div><div class="wall-base"></div></div><figcaption id="cap-combo-dormitorio-3" data-editable="text">Gris + grafito</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#c9c2d9"></div><div class="wall-accent" style="background:#6b6b6b"></div><div class="wall-base"></div></div><figcaption id="cap-combo-dormitorio-4" data-editable="text">Lavanda + gris perla</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#bcd8cc"></div><div class="wall-accent" style="background:#3a5a4a"></div><div class="wall-base"></div></div><figcaption id="cap-combo-dormitorio-5" data-editable="text">Verde menta + verde oscuro</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#d98e73"></div><div class="wall-accent" style="background:#5a4636"></div><div class="wall-base"></div></div><figcaption id="cap-combo-dormitorio-6" data-editable="text">Terracota suave + marrón</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#a9bdc9"></div><div class="wall-base"></div></div><figcaption id="cap-combo-dormitorio-7" data-editable="text">Azul grisáceo (un solo color)</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#e3c9c3"></div><div class="wall-base"></div></div><figcaption id="cap-combo-dormitorio-8" data-editable="text">Rosa empolvado (un solo color)</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#b8ae9e"></div><div class="wall-base"></div></div><figcaption id="cap-combo-dormitorio-9" data-editable="text">Gris topo (un solo color)</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#2f4a3c"></div><div class="wall-accent" style="background:#ffffff"></div><div class="wall-base"></div></div><figcaption id="cap-combo-dormitorio-10" data-editable="text">Verde bosque + blanco</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#6e2a35"></div><div class="wall-accent" style="background:#d9d6d0"></div><div class="wall-base"></div></div><figcaption id="cap-combo-dormitorio-11" data-editable="text">Burdeos + gris perla</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#a9c6dd"></div><div class="wall-base"></div></div><figcaption id="cap-combo-dormitorio-12" data-editable="text">Azul cielo (un solo color)</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#d8c3a5"></div><div class="wall-accent" style="background:#ffffff"></div><div class="wall-base"></div></div><figcaption id="cap-combo-dormitorio-13" data-editable="text">Arena + blanco</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#a98fa0"></div><div class="wall-accent" style="background:#8a8378"></div><div class="wall-base"></div></div><figcaption id="cap-combo-dormitorio-14" data-editable="text">Malva + gris</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#9cae92"></div><div class="wall-base"></div></div><figcaption id="cap-combo-dormitorio-15" data-editable="text">Verde salvia (un solo color)</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#9cae92"></div><div class="wall-accent" style="background:#d9d6d0"></div><div class="wall-base"></div></div><figcaption id="cap-combo-dormitorio-16" data-editable="text">Verde salvia + gris perla</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#1d3b63"></div><div class="wall-base"></div></div><figcaption id="cap-combo-dormitorio-17" data-editable="text">Azul marino (un solo color)</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#c1684f"></div><div class="wall-base"></div></div><figcaption id="cap-combo-dormitorio-18" data-editable="text">Terracota (un solo color)</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#8a8378"></div><div class="wall-accent" style="background:#ffffff"></div><div class="wall-base"></div></div><figcaption id="cap-combo-dormitorio-19" data-editable="text">Gris cálido + blanco</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#d9a441"></div><div class="wall-accent" style="background:#3a3a3a"></div><div class="wall-base"></div></div><figcaption id="cap-combo-dormitorio-20" data-editable="text">Mostaza + gris oscuro</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#c9c2d9"></div><div class="wall-base"></div></div><figcaption id="cap-combo-dormitorio-21" data-editable="text">Lavanda (un solo color)</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#6b7a4a"></div><div class="wall-accent" style="background:#f1ead9"></div><div class="wall-base"></div></div><figcaption id="cap-combo-dormitorio-22" data-editable="text">Verde oliva + crema</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#1f4a52"></div><div class="wall-accent" style="background:#d8c3a5"></div><div class="wall-base"></div></div><figcaption id="cap-combo-dormitorio-23" data-editable="text">Azul petróleo + arena</figcaption></figure>
+      <figure class="deletable"><div class="wall-mock"><div class="wall-ceiling"></div><div class="wall-main" style="background:#d9a8a0"></div><div class="wall-accent" style="background:#8a8378"></div><div class="wall-base"></div></div><figcaption id="cap-combo-dormitorio-24" data-editable="text">Rosa empolvado + gris</figcaption></figure>
+    </div>
+  </div>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<clipPath id="clip-comedor-main" clipPathUnits="objectBoundingBox">
+  <path d="M0,0.1667 L0.2778,0.0700 L0.2778,0.6967 L0.1778,0.7817 L0.0889,0.8633 L0,0.9500 Z M0.7222,0.0700 L1,0.1667 L1,0.9917 L0.9556,0.9450 L0.8667,0.8483 L0.7778,0.7533 L0.7222,0.6517 Z"/>
+</clipPath>
+<clipPath id="clip-comedor-accent" clipPathUnits="objectBoundingBox">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M0.2778,0.0700 L0.7222,0.0700 L0.7222,0.7000 L0.2778,0.7000 Z M0.4256,0.1633 L0.6833,0.1633 L0.6833,0.5967 L0.4256,0.5967 Z"/>
+</clipPath>
+<clipPath id="clip-salon-main" clipPathUnits="objectBoundingBox">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M0,0.1002 L0.5722,0.2671 L0.5722,0.7062 L0.3333,0.7045 L0.2222,0.7162 L0.1778,0.7312 L0.0889,0.7496 L0.0444,0.7763 L0,0.7913 Z M0.2444,0.3256 L0.4222,0.3256 L0.4222,0.4591 L0.2444,0.4591 Z"/>
+</clipPath>
+<clipPath id="clip-salon-accent" clipPathUnits="objectBoundingBox">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M0.5722,0.2671 L1,0.1252 L0.9989,0.8280 L0.9556,0.7947 L0.8889,0.7129 L0.7778,0.7062 L0.6667,0.7029 L0.5722,0.7029 Z M0.6278,0.3506 L0.85,0.3506 L0.85,0.5509 L0.6278,0.5509 Z"/>
+</clipPath>
+<clipPath id="clip-dormitorio-main" clipPathUnits="objectBoundingBox">
+  <path d="M0,0.0300 L0.4389,0.2971 L0.4444,0.7145 L0.0944,0.7095 L0,0.7145 Z"/>
+</clipPath>
+<clipPath id="clip-dormitorio-accent" clipPathUnits="objectBoundingBox">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M0.5611,0.2504 L1,0.0885 L1,0.8681 L0.5611,0.8263 Z M0.5611,0.2471 L0.8756,0.2471 L0.8756,0.8180 L0.5611,0.8180 Z"/>
+</clipPath>
+</defs>
+</svg>
+
+<div class="lightbox-overlay" id="comboPreviewModal" aria-hidden="true">
+  <div class="lightbox-box" role="dialog" aria-modal="true" style="max-width:600px;">
+    <button class="lightbox-close" type="button" data-close-modal aria-label="Cerrar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <h3 id="comboPreviewTitle">Combinación</h3>
+    <p style="margin-bottom:18px;">Simulación sobre una foto real de referencia.</p>
+    <div class="combo-preview-frame" id="comboPreviewFrame">
+      <img id="comboPreviewImg" src="" alt="">
+      <div class="preview-tint" id="ptMainA"></div>
+      <div class="preview-tint" id="ptMainB"></div>
+      <div class="preview-tint" id="ptAccentA"></div>
+      <div class="preview-tint" id="ptAccentB"></div>
+      <div class="preview-patch" id="ptPatch1"><img id="patchImg1" src="" alt=""></div>
+      <div class="preview-patch" id="ptPatch2"><img id="patchImg2" src="" alt=""></div>
+    </div>
+  </div>
+</div>
+-->
+
+<button class="to-top" id="toTop" aria-label="Volver arriba">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<div class="toast" id="toast"></div>
+
+<button class="edit-toggle" id="editToggle" aria-label="Modo de edición" title="Editar esta página">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+</button>
+<div class="edit-bar" id="editBar">
+  <span>Modo de edición: toca un texto para cambiarlo, la foto para subir otra, o la X para quitar algo. El cliente no ve nada de esto hasta que pulses Actualizar.</span>
+  <button type="button" class="trash-toggle" id="trashToggle">🗑 Papelera (<span id="trashCount">0</span>)</button>
+  <button type="button" class="btn btn-ghost btn-sm" id="editCancel" style="background:transparent;border-color:rgba(255,255,255,.4);color:#fff;">Cancelar</button>
+  <button type="button" class="btn btn-primary btn-sm" id="editSave">Actualizar</button>
+</div>
+<div class="trash-panel" id="trashPanel">
+  <h4>Elementos eliminados</h4>
+  <div id="trashList"><p class="trash-empty">No has eliminado nada todavía.</p></div>
+</div>
+<input type="file" id="editFileInput" accept="image/*" style="display:none;">
+
+<script>
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // reveal-on-scroll: elements stay visible by default; this only arms the
+  // fade/slide-in once JS is confirmed running, so a no-JS or pre-load
+  // view still shows everything. It toggles both ways (never unobserves),
+  // so the movement repeats every time a section crosses into view —
+  // scrolling back up and down again always replays it.
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    var revealEls = document.querySelectorAll('.reveal');
+    revealEls.forEach(function(el, i){
+      el.classList.add('reveal-init');
+      el.style.transitionDelay = (i % 3) * 90 + 'ms';
+    });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        entry.target.classList.toggle('reveal-visible', entry.isIntersecting);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function(el){ io.observe(el); });
+  }
+
+  // header shadow + back-to-top, batched on rAF to stay smooth while scrolling
+  var header = document.querySelector('header');
+  var toTop = document.getElementById('toTop');
+  var ticking = false;
+  function onScroll(){
+    var y = window.scrollY || document.documentElement.scrollTop;
+    header.classList.toggle('scrolled', y > 8);
+    toTop.classList.toggle('show', y > 480);
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
+  }, { passive: true });
+  onScroll();
+
+  toTop.addEventListener('click', function(){
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+  });
+
+  // mobile menu: the nav links are hidden below 860px with no other way to
+  // reach them, so this hamburger button is the only way in on a phone.
+  (function(){
+    var navToggle = document.getElementById('navToggle');
+    var navLinks = document.getElementById('navLinks');
+    if (!navToggle || !navLinks) return;
+
+    function closeMenu(){
+      navLinks.classList.remove('mobile-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }
+    function openMenu(){
+      navLinks.classList.add('mobile-open');
+      navToggle.setAttribute('aria-expanded', 'true');
+    }
+
+    navToggle.addEventListener('click', function(){
+      if (navLinks.classList.contains('mobile-open')) closeMenu(); else openMenu();
+    });
+    navLinks.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', closeMenu);
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') closeMenu();
+    });
+    document.addEventListener('click', function(e){
+      if (!navLinks.classList.contains('mobile-open')) return;
+      if (navLinks.contains(e.target) || navToggle.contains(e.target)) return;
+      closeMenu();
+    });
+  })();
+
+  // in-page edit mode: lets an owner/editor change text and swap photos
+  // without going through Claude. Hidden entirely for anyone else.
+  (function(){
+    if (!window.claude || typeof window.claude.use !== 'function') return;
+
+    var editToggle = document.getElementById('editToggle');
+    var editBar = document.getElementById('editBar');
+    var editSave = document.getElementById('editSave');
+    var editCancel = document.getElementById('editCancel');
+    var fileInput = document.getElementById('editFileInput');
+    var toast = document.getElementById('toast');
+    var editableTexts = Array.prototype.slice.call(document.querySelectorAll('[data-editable="text"]'));
+    var editableImages = Array.prototype.slice.call(document.querySelectorAll('[data-editable="image"]'));
+    var deletables = Array.prototype.slice.call(document.querySelectorAll('.deletable'));
+    var trashToggle = document.getElementById('trashToggle');
+    var trashPanel = document.getElementById('trashPanel');
+    var trashList = document.getElementById('trashList');
+    var trashCount = document.getElementById('trashCount');
+    var artifact = null, assets = null;
+    var originalValues = {};
+    var activeImgTarget = null;
+    var addPhotoTarget = null;
+    var addPhotoButtons = Array.prototype.slice.call(document.querySelectorAll('.add-photo-btn'));
+
+    function uid(prefix){ return prefix + '-' + Date.now() + '-' + Math.floor(Math.random() * 1000); }
+
+    addPhotoButtons.forEach(function(btn){
+      btn.addEventListener('click', function(e){
+        e.stopPropagation();
+        addPhotoTarget = { grid: btn.parentElement, type: btn.getAttribute('data-add-type'), btn: btn };
+        activeImgTarget = null;
+        fileInput.click();
+      });
+    });
+
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(function(){ toast.classList.remove('show'); }, 2800);
+    }
+
+    function guardTextField(el){
+      el.addEventListener('keydown', function(e){ if (e.key === 'Enter') e.preventDefault(); });
+      el.addEventListener('paste', function(e){
+        e.preventDefault();
+        var text = (e.clipboardData || window.clipboardData).getData('text/plain');
+        document.execCommand('insertText', false, text);
+      });
+    }
+    editableTexts.forEach(guardTextField);
+
+    // phone/email appear in more than one place (contact card, footer, the
+    // quote-request button's mailto link) — typing in any one of them
+    // mirrors the text to its twins and rebuilds any mailto: links so they
+    // never go stale.
+    function wireSyncGroup(groupName){
+      var textEls = Array.prototype.slice.call(document.querySelectorAll('[data-sync="' + groupName + '"]'));
+      var hrefEls = Array.prototype.slice.call(document.querySelectorAll('[data-sync-href="' + groupName + '"]'));
+      textEls.forEach(function(el){
+        el.addEventListener('input', function(){
+          var value = el.textContent;
+          var looksFilled = value.trim() && !/^añade/i.test(value.trim());
+          textEls.forEach(function(other){
+            if (other !== el) other.textContent = value;
+            if (looksFilled) { other.classList.remove('placeholder'); other.classList.remove('placeholder-footer'); }
+          });
+          if (groupName === 'email') {
+            hrefEls.forEach(function(a){
+              var current = a.getAttribute('href') || '';
+              var query = current.indexOf('?') >= 0 ? current.slice(current.indexOf('?')) : '';
+              a.setAttribute('href', 'mailto:' + value.trim() + query);
+            });
+          }
+        });
+      });
+    }
+    wireSyncGroup('phone');
+    wireSyncGroup('email');
+
+    function injectPhotoButtons(){
+      editableImages.forEach(function(img){
+        if (img._editBtn) return;
+        var wrap = img.closest('.team-card, .photo, figure') || img.parentElement;
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'photo-edit-btn';
+        btn.setAttribute('aria-label', 'Cambiar foto');
+        btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 7h3l2-2h6l2 2h3v12H4Z"/><circle cx="12" cy="13" r="3.5"/></svg>';
+        btn.addEventListener('click', function(e){ e.stopPropagation(); activeImgTarget = img; fileInput.click(); });
+        wrap.appendChild(btn);
+        img._editBtn = btn;
+      });
+    }
+
+    // every "X" removes one block without losing it: it's only hidden
+    // (class deleted-hidden), so it survives Actualizar and can be brought
+    // back later from the Papelera, even in a future visit.
+    function trashLabelFor(el){
+      var labelEl = el.querySelector('h1,h2,h3,figcaption,.cap,.label,.value,p,span');
+      var text = (labelEl ? labelEl.textContent : el.textContent || '').trim();
+      return (text || 'Elemento').slice(0, 44);
+    }
+
+    function refreshTrashList(){
+      var hidden = deletables.filter(function(el){ return el.classList.contains('deleted-hidden'); });
+      trashCount.textContent = String(hidden.length);
+      if (!hidden.length) {
+        trashList.innerHTML = '<p class="trash-empty">No has eliminado nada todavía.</p>';
+        return;
+      }
+      trashList.innerHTML = '';
+      hidden.forEach(function(el){
+        var row = document.createElement('div');
+        row.className = 'trash-item';
+        var span = document.createElement('span');
+        span.textContent = trashLabelFor(el);
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'btn btn-ghost btn-sm';
+        btn.textContent = 'Restaurar';
+        btn.addEventListener('click', function(){
+          el.classList.remove('deleted-hidden');
+          refreshTrashList();
+        });
+        row.appendChild(span);
+        row.appendChild(btn);
+        trashList.appendChild(row);
+      });
+    }
+
+    function injectDeleteButtons(){
+      deletables.forEach(function(el){
+        if (el._deleteBtn) return;
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'delete-btn';
+        btn.setAttribute('aria-label', 'Eliminar');
+        btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+        btn.addEventListener('click', function(e){
+          e.stopPropagation();
+          el.classList.add('deleted-hidden');
+          refreshTrashList();
+        });
+        el.appendChild(btn);
+        el._deleteBtn = btn;
+      });
+    }
+
+    trashToggle.addEventListener('click', function(){
+      trashPanel.classList.toggle('show');
+    });
+
+    function snapshot(){
+      originalValues = {};
+      editableTexts.forEach(function(el){ originalValues[el.id] = el.textContent; });
+      editableImages.forEach(function(el){ originalValues[el.id] = el.getAttribute('src'); });
+    }
+
+    function restoreOriginal(){
+      editableTexts.forEach(function(el){ if (el.id in originalValues) el.textContent = originalValues[el.id]; });
+      editableImages.forEach(function(el){ if (el.id in originalValues) el.setAttribute('src', originalValues[el.id]); });
+    }
+
+    function setEditMode(on){
+      document.body.classList.toggle('edit-mode', on);
+      editToggle.classList.toggle('active', on);
+      editBar.classList.toggle('show', on);
+      editableTexts.forEach(function(el){
+        if (on) el.setAttribute('contenteditable', 'true');
+        else el.removeAttribute('contenteditable');
+      });
+      if (on) { snapshot(); injectPhotoButtons(); }
+    }
+
+    // builds the HTML to publish from a DETACHED CLONE of the live page —
+    // never the live DOM itself — so nothing transient (scroll position,
+    // reveal-on-scroll state, the edit UI, a mid-click "saving…" label,
+    // even the viewer's own light/dark preference) ever gets baked into
+    // what every future visitor sees.
+    function buildPublishHtml(){
+      var clone = document.documentElement.cloneNode(true);
+      clone.removeAttribute('data-theme');
+      if (clone.style) clone.style.removeProperty('color-scheme');
+      var cBody = clone.querySelector('body') || clone;
+      cBody.classList.remove('edit-mode');
+      var cHeader = clone.querySelector('header');
+      if (cHeader) cHeader.classList.remove('scrolled');
+      var cToTop = clone.querySelector('#toTop');
+      if (cToTop) cToTop.classList.remove('show');
+      var cNavLinks = clone.querySelector('#navLinks');
+      if (cNavLinks) cNavLinks.classList.remove('mobile-open');
+      var cNavToggle = clone.querySelector('#navToggle');
+      if (cNavToggle) cNavToggle.setAttribute('aria-expanded', 'false');
+      var cEditToggle = clone.querySelector('#editToggle');
+      if (cEditToggle) { cEditToggle.classList.remove('active'); cEditToggle.classList.remove('ready'); }
+      var cEditBar = clone.querySelector('#editBar');
+      if (cEditBar) cEditBar.classList.remove('show');
+      var cEditSave = clone.querySelector('#editSave');
+      if (cEditSave) { cEditSave.removeAttribute('disabled'); cEditSave.textContent = 'Actualizar'; }
+      var cTrashPanel = clone.querySelector('#trashPanel');
+      if (cTrashPanel) cTrashPanel.classList.remove('show');
+      clone.querySelectorAll('.reveal').forEach(function(el){
+        el.classList.remove('reveal-init', 'reveal-visible');
+        if (el.style) el.style.removeProperty('transition-delay');
+      });
+      clone.querySelectorAll('[data-editable="text"]').forEach(function(el){ el.removeAttribute('contenteditable'); });
+      clone.querySelectorAll('.photo-edit-btn').forEach(function(el){ el.remove(); });
+      clone.querySelectorAll('.delete-btn').forEach(function(el){ el.remove(); });
+      return '<!doctype html>' + clone.outerHTML;
+    }
+
+    editToggle.addEventListener('click', function(){
+      setEditMode(!document.body.classList.contains('edit-mode'));
+    });
+
+    editCancel.addEventListener('click', function(){
+      restoreOriginal();
+      setEditMode(false);
+    });
+
+    fileInput.addEventListener('change', function(){
+      var file = fileInput.files && fileInput.files[0];
+      fileInput.value = '';
+      if (!file || !assets) return;
+
+      if (addPhotoTarget) {
+        var target = addPhotoTarget;
+        addPhotoTarget = null;
+        target.btn.disabled = true;
+        assets.upload(file).then(function(res){
+          var wrap, img, id;
+          if (target.type === 'team-card') {
+            id = uid('img-added');
+            wrap = document.createElement('div');
+            wrap.className = 'team-card reveal deletable';
+            img = document.createElement('img');
+            img.id = id;
+            img.setAttribute('data-editable', 'image');
+            img.src = res.url;
+            img.alt = 'Foto añadida';
+            var cap = document.createElement('div');
+            cap.className = 'cap';
+            cap.id = uid('cap-added');
+            cap.setAttribute('data-editable', 'text');
+            cap.setAttribute('contenteditable', 'true');
+            cap.textContent = 'Nueva foto';
+            guardTextField(cap);
+            editableTexts.push(cap);
+            originalValues[cap.id] = cap.textContent;
+            wrap.appendChild(img);
+            wrap.appendChild(cap);
+          } else {
+            id = uid('img-added');
+            wrap = document.createElement('figure');
+            wrap.className = 'gallery-photo deletable';
+            img = document.createElement('img');
+            img.id = id;
+            img.setAttribute('data-editable', 'image');
+            img.src = res.url;
+            img.alt = 'Foto añadida';
+            wrap.appendChild(img);
+          }
+          target.grid.insertBefore(wrap, target.btn);
+          editableImages.push(img);
+          originalValues[img.id] = img.getAttribute('src');
+          deletables.push(wrap);
+          injectPhotoButtons();
+          injectDeleteButtons();
+          showToast('Foto añadida.');
+          target.btn.disabled = false;
+        }).catch(function(){
+          showToast('No se pudo subir la foto. Inténtalo de nuevo.');
+          target.btn.disabled = false;
+        });
+        return;
+      }
+
+      if (!activeImgTarget) return;
+      var img = activeImgTarget;
+      var prevSrc = img.getAttribute('src');
+      img.style.opacity = '.4';
+      assets.upload(file).then(function(res){
+        img.setAttribute('src', res.url);
+        img.style.opacity = '';
+      }).catch(function(){
+        img.setAttribute('src', prevSrc);
+        img.style.opacity = '';
+        showToast('No se pudo subir la foto. Inténtalo de nuevo.');
+      });
+    });
+
+    editSave.addEventListener('click', function(){
+      if (!artifact) return;
+      var html = buildPublishHtml();
+      editSave.disabled = true;
+      var prevLabel = editSave.textContent;
+      editSave.textContent = 'Actualizando…';
+      artifact.publish(html).then(function(){
+        showToast('Página actualizada. Ya es visible para el cliente.');
+      }).catch(function(e){
+        if (e && e.code === 'conflict') {
+          showToast('Alguien más actualizó la página a la vez. Recargando…');
+          setTimeout(function(){ location.reload(); }, 1600);
+        } else {
+          showToast('No se pudo actualizar. Vuelve a intentarlo.');
+        }
+      }).then(function(){
+        editSave.disabled = false;
+        editSave.textContent = prevLabel;
+      });
+    });
+
+    (async function init(){
+      var user = null;
+      try { user = await window.claude.use('user'); } catch(e){}
+      var canEdit = false;
+      if (user) {
+        try { canEdit = (await user.canEdit()) || (await user.isOwner()); } catch(e){ canEdit = false; }
+      }
+      if (!canEdit) return;
+      try { artifact = await window.claude.use('artifact'); } catch(e){}
+      try { assets = await window.claude.use('assets'); } catch(e){}
+      if (!artifact) return;
+      injectDeleteButtons();
+      refreshTrashList();
+      editToggle.classList.add('ready');
+    })();
+  })();
+
+  /* Lógica de "Combinaciones" desactivada junto con su HTML (27/11/2026). Se deja aquí, sin que se ejecute, para cuando Cristopher quiera reactivar la función. */
+  /*
+  // "ver combinaciones" lightboxes on the trabajos-realizados cards
+  (function(){
+    function openModal(id){
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.classList.add('show');
+      el.setAttribute('aria-hidden', 'false');
+    }
+    function closeModal(el){
+      el.classList.remove('show');
+      el.setAttribute('aria-hidden', 'true');
+    }
+    document.querySelectorAll('.gallery-card[data-modal]').forEach(function(card){
+      function trigger(){ openModal(card.getAttribute('data-modal')); }
+      card.addEventListener('click', trigger);
+      card.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); trigger(); }
+      });
+    });
+    document.querySelectorAll('.lightbox-overlay').forEach(function(overlay){
+      overlay.addEventListener('click', function(e){ if (e.target === overlay) closeModal(overlay); });
+      var closeBtn = overlay.querySelector('[data-close-modal]');
+      if (closeBtn) closeBtn.addEventListener('click', function(){ closeModal(overlay); });
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.lightbox-overlay.show').forEach(closeModal);
+      }
+    });
+  })();
+
+  // combinaciones: click a color swatch to preview it over a real photo
+  (function(){
+    var ROOMS = {
+      comedor: {
+        photo: 'foto-empty-comedor-2.jpg',
+        main: ["0% 16.67%,27.78% 7.00%,27.78% 69.67%,17.78% 78.17%,8.89% 86.33%,0% 95.00%",
+               "72.22% 7.00%,100% 16.67%,100% 99.17%,95.56% 94.50%,86.67% 84.83%,77.78% 75.33%,72.22% 65.17%"],
+        accent: ["27.78% 7.00%,72.22% 7.00%,72.22% 70.00%,27.78% 70.00%"],
+        holes: [{left:42.56,top:16.33,width:25.78,height:43.33}]
+      },
+      salon: {
+        photo: 'foto-empty-salon-1.jpg',
+        main: ["0% 10.02%,57.22% 26.71%,57.22% 70.62%,33.33% 70.45%,22.22% 71.62%,17.78% 73.12%,8.89% 74.96%,4.44% 77.63%,0% 79.13%"],
+        accent: ["57.22% 26.71%,100% 12.52%,99.89% 82.80%,95.56% 79.47%,88.89% 71.29%,77.78% 70.62%,66.67% 70.29%,57.22% 70.29%"],
+        holes: [{left:24.44,top:32.56,width:17.78,height:13.35},{left:62.78,top:35.06,width:22.22,height:20.03}]
+      },
+      dormitorio: {
+        photo: 'foto-real-dormitorio-1.jpg',
+        main: ["0% 3.00%,43.89% 29.71%,44.44% 71.45%,9.44% 70.95%,0% 71.45%"],
+        accent: ["56.11% 25.04%,100% 8.85%,100% 86.81%,56.11% 82.63%"],
+        holes: [{left:56.11,top:24.71,width:31.45,height:57.09}]
+      }
+    };
+    var previewModal = document.getElementById('comboPreviewModal');
+    if (!previewModal) return;
+    var img = document.getElementById('comboPreviewImg');
+    var mainEls = [document.getElementById('ptMainA'), document.getElementById('ptMainB')];
+    var accentEls = [document.getElementById('ptAccentA'), document.getElementById('ptAccentB')];
+    var patchEls = [
+      [document.getElementById('ptPatch1'), document.getElementById('patchImg1')],
+      [document.getElementById('ptPatch2'), document.getElementById('patchImg2')]
+    ];
+    var titleEl = document.getElementById('comboPreviewTitle');
+
+    function applyPieces(els, polys, color){
+      for (var i = 0; i < els.length; i++){
+        if (i < polys.length){
+          els[i].style.clipPath = 'polygon(' + polys[i] + ')';
+          els[i].style.background = color;
+          els[i].style.display = 'block';
+        } else {
+          els[i].style.display = 'none';
+        }
+      }
+    }
+
+    document.querySelectorAll('.lightbox-grid .wall-mock').forEach(function(wm){
+      wm.addEventListener('click', function(){
+        var modal = wm.closest('.lightbox-overlay');
+        if (!modal) return;
+        var room = modal.id.replace('modal-', '');
+        var cfg = ROOMS[room];
+        if (!cfg) return;
+        var mainEl = wm.querySelector('.wall-main');
+        var accentEl = wm.querySelector('.wall-accent');
+        var mainColor = mainEl ? mainEl.style.background : '#ffffff';
+        var accentColor = accentEl ? accentEl.style.background : mainColor;
+        var figure = wm.closest('figure');
+        var cap = figure ? figure.querySelector('figcaption') : null;
+
+        img.src = cfg.photo;
+        applyPieces(mainEls, cfg.main, mainColor);
+        applyPieces(accentEls, cfg.accent, accentColor);
+
+        for (var i = 0; i < patchEls.length; i++){
+          var box = patchEls[i][0], pimg = patchEls[i][1];
+          if (i < cfg.holes.length){
+            var h = cfg.holes[i];
+            box.style.left = h.left + '%';
+            box.style.top = h.top + '%';
+            box.style.width = h.width + '%';
+            box.style.height = h.height + '%';
+            box.style.display = 'block';
+            pimg.src = cfg.photo;
+            pimg.style.width = (10000 / h.width) + '%';
+            pimg.style.height = (10000 / h.height) + '%';
+            pimg.style.left = (-(h.left / h.width) * 100) + '%';
+            pimg.style.top = (-(h.top / h.height) * 100) + '%';
+          } else {
+            box.style.display = 'none';
+          }
+        }
+
+        titleEl.textContent = cap ? cap.textContent : '';
+
+        previewModal.classList.add('show');
+        previewModal.setAttribute('aria-hidden', 'false');
+      });
+    });
+  })();
+  */
+</script>
+
+</body></html>
