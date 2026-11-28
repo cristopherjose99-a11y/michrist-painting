@@ -287,6 +287,36 @@
     margin:0 auto;
   }
   .reviews-empty p{font-size:1rem;}
+  .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:20px;}
+  .reviews-grid:empty{display:none;margin:0;}
+  @media (max-width:780px){ .reviews-grid{grid-template-columns:1fr;} }
+  .review-card{
+    background:var(--bg);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:24px 22px;
+    margin:0;
+  }
+  .review-card blockquote{margin:0 0 14px;font-size:.98rem;color:var(--ink);line-height:1.6;}
+  .review-card blockquote::before{content:"\201C";}
+  .review-card blockquote::after{content:"\201D";}
+  .review-card figcaption{font-size:.85rem;font-weight:600;color:var(--navy);}
+  .review-form{max-width:480px;margin:28px auto 0;text-align:left;}
+  .review-form .form-row{margin-bottom:14px;}
+  .review-form label{display:block;font-size:.82rem;font-weight:600;color:var(--navy);margin-bottom:6px;}
+  .review-form input, .review-form textarea{
+    width:100%;
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:10px 12px;
+    font-family:var(--font-body);
+    font-size:.92rem;
+    color:var(--ink);
+    background:var(--bg);
+  }
+  .review-form textarea{resize:vertical;min-height:70px;}
+  .review-form input:focus, .review-form textarea:focus{outline:2px solid var(--blue-bright);outline-offset:1px;}
+  .review-form .btn{width:100%;margin-top:2px;}
 
   /* trabajos realizados */
   .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
@@ -859,9 +889,26 @@
         <p class="eyebrow" id="resenas-eyebrow" data-editable="text">Reseñas</p>
         <h2 id="resenas-h2" data-editable="text">Lo que opinan nuestros clientes</h2>
       </div>
-      <div class="reviews-empty reveal" style="">
+      <div class="reviews-grid" id="reviewsGrid"></div>
+      <div class="reviews-empty reveal deletable">
         <p id="resenas-empty-text" data-editable="text">Todavía no tenemos reseñas publicadas. Si confías en nosotros para tu proyecto, sé de los primeros en contarnos cómo te fue.</p>
       </div>
+      <form class="review-form" id="reviewForm">
+        <div class="form-row">
+          <label for="rv-name" id="rv-name-label" data-editable="text">Tu nombre</label>
+          <input type="text" id="rv-name" name="Nombre" autocomplete="name" required>
+        </div>
+        <div class="form-row">
+          <label for="rv-text" id="rv-text-label" data-editable="text">Tu opinión</label>
+          <textarea id="rv-text" name="Reseña" rows="3" required placeholder="Cuéntanos cómo fue tu experiencia con nosotros."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-sm" id="rv-submit" data-editable="text">Enviar reseña</button>
+        <p class="form-note" id="rv-status" role="status"></p>
+      </form>
+      <button type="button" class="add-faq-btn" id="addReviewBtn" style="margin-top:20px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+        Añadir reseña
+      </button>
     </div>
   </section>
 
@@ -1060,6 +1107,10 @@
           </div>
           <button type="submit" class="btn btn-primary" id="qf-submit" style="width:100%;">Solicitar presupuesto</button>
           <p class="form-note" id="qf-status" role="status"></p>
+          <p style="margin-top:10px;font-size:.78rem;color:#a9bcd8;">
+            <span id="qf-terms-note" data-editable="text">Presupuesto sin compromiso.</span>
+            <a href="#" id="termsModalOpen" data-editable="text" style="color:#fff;text-decoration:underline;">Ver términos de la visita</a>
+          </p>
         </form>
       </div>
     </div>
@@ -1104,6 +1155,16 @@
     <small id="footer-copyright" data-editable="text">© 2026 Michrist Painting — Barcelona</small>
   </div>
 </footer>
+
+<div class="lightbox-overlay" id="termsModal" aria-hidden="true">
+  <div class="lightbox-box" role="dialog" aria-modal="true" aria-labelledby="terms-modal-title" style="max-width:560px;">
+    <button class="lightbox-close" type="button" id="termsModalClose" aria-label="Cerrar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <h3 id="terms-modal-title" data-editable="text">Términos y condiciones de la visita</h3>
+    <p id="terms-modal-text" data-editable="text">La visita para la valoración de los trabajos y elaboración del presupuesto conlleva un coste de desplazamiento de 20 €, que no se cobrará en caso de aceptación del presupuesto y contratación del servicio. Si el presupuesto no es aceptado, se cobrará el importe indicado en concepto de desplazamiento.</p>
+  </div>
+</div>
 
 <!-- Ventanas emergentes de "Combinaciones" ocultas junto con la sección de arriba (27/11/2026) -- mismo motivo, quedan aquí para cuando Cristopher quiera añadirlas él mismo.
 <div class="lightbox-overlay" id="modal-comedor" aria-hidden="true">
@@ -1420,6 +1481,77 @@
       status.textContent = '¡Gracias! Te llevamos a WhatsApp para enviar tu solicitud — te responderemos a la mayor brevedad posible.';
       status.className = 'form-note ok';
       window.open(url, '_blank');
+    });
+  })();
+
+  // "leave a review" stays on the page — it goes to the owner's inbox
+  // (not straight onto the site), and only the reviews the owner actually
+  // types in via "Añadir reseña" (owner-only, below) ever show up, so
+  // nothing gets published without a person approving it first.
+  (function(){
+    var form = document.getElementById('reviewForm');
+    if (!form) return;
+    var status = document.getElementById('rv-status');
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var emailEl = document.getElementById('email-text');
+      var to = (emailEl && emailEl.textContent.trim()) || 'michristpainting@gmail.com';
+      var data = {
+        Nombre: document.getElementById('rv-name').value,
+        'Reseña': document.getElementById('rv-text').value,
+        _subject: 'Nueva reseña recibida — Michrist Painting',
+        _captcha: 'false'
+      };
+      var submitBtn = document.getElementById('rv-submit');
+      submitBtn.disabled = true;
+      var prevText = submitBtn.textContent;
+      submitBtn.textContent = 'Enviando…';
+      status.textContent = '';
+      status.className = 'form-note';
+
+      var ctrl = ('AbortController' in window) ? new AbortController() : null;
+      var timer = setTimeout(function(){ if (ctrl) ctrl.abort(); }, 12000);
+
+      fetch('https://formsubmit.co/ajax/' + encodeURIComponent(to), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data),
+        signal: ctrl ? ctrl.signal : undefined
+      }).then(function(res){
+        clearTimeout(timer);
+        if (!res.ok) throw new Error('bad status');
+        return res.json();
+      }).then(function(){
+        form.reset();
+        status.textContent = '¡Gracias! Vamos a revisarla antes de publicarla.';
+        status.className = 'form-note ok';
+      }).catch(function(){
+        clearTimeout(timer);
+        status.textContent = 'No se pudo enviar. Vuelve a intentarlo en un momento.';
+        status.className = 'form-note err';
+      }).then(function(){
+        submitBtn.disabled = false;
+        submitBtn.textContent = prevText;
+      });
+    });
+  })();
+
+  // terms modal: the displacement-fee notice reuses the same lightbox
+  // styling as the (currently dormant) "combinaciones" feature, so it opens
+  // for every visitor regardless of edit mode.
+  (function(){
+    var openBtn = document.getElementById('termsModalOpen');
+    var modal = document.getElementById('termsModal');
+    var closeBtn = document.getElementById('termsModalClose');
+    if (!openBtn || !modal) return;
+    function openModal(e){ if (e) e.preventDefault(); modal.classList.add('show'); modal.setAttribute('aria-hidden', 'false'); }
+    function closeModal(){ modal.classList.remove('show'); modal.setAttribute('aria-hidden', 'true'); }
+    openBtn.addEventListener('click', openModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e){ if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && modal.classList.contains('show')) closeModal();
     });
   })();
 
@@ -1881,6 +2013,39 @@
         injectDeleteButtons();
         span.focus();
         showToast('Pregunta añadida. Edita el texto y la respuesta.');
+      });
+    }
+
+    var addReviewBtn = document.getElementById('addReviewBtn');
+    var reviewsGrid = document.getElementById('reviewsGrid');
+    if (addReviewBtn && reviewsGrid) {
+      addReviewBtn.addEventListener('click', function(){
+        var textId = uid('review-text'), nameId = uid('review-name');
+        var card = document.createElement('figure');
+        card.className = 'review-card deletable';
+        var bq = document.createElement('blockquote');
+        bq.id = textId;
+        bq.setAttribute('data-editable', 'text');
+        bq.setAttribute('contenteditable', 'true');
+        bq.textContent = 'Escribe aquí la reseña del cliente.';
+        guardTextField(bq);
+        editableTexts.push(bq);
+        originalValues[textId] = bq.textContent;
+        var cap = document.createElement('figcaption');
+        cap.id = nameId;
+        cap.setAttribute('data-editable', 'text');
+        cap.setAttribute('contenteditable', 'true');
+        cap.textContent = 'Nombre del cliente';
+        guardTextField(cap);
+        editableTexts.push(cap);
+        originalValues[nameId] = cap.textContent;
+        card.appendChild(bq);
+        card.appendChild(cap);
+        reviewsGrid.appendChild(card);
+        deletables.push(card);
+        injectDeleteButtons();
+        bq.focus();
+        showToast('Reseña añadida. Pon el texto y el nombre, y borra el aviso de "aún no tenemos reseñas" si ya no hace falta.');
       });
     }
 
