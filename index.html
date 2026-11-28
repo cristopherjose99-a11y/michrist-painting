@@ -541,6 +541,9 @@
   .cta-block textarea{resize:vertical;min-height:70px;}
   .cta-block input::placeholder, .cta-block textarea::placeholder{color:#8fa6c9;}
   .cta-block input:focus, .cta-block textarea:focus{outline:2px solid var(--amber);outline-offset:1px;}
+  .form-check label{display:flex;gap:10px;align-items:flex-start;font-size:.82rem;font-weight:400;color:#cfe0f7;margin-bottom:0;cursor:pointer;}
+  .form-check input[type="checkbox"]{margin-top:3px;flex:none;width:16px;height:16px;accent-color:var(--amber);cursor:pointer;}
+  .form-check a{color:#fff;text-decoration:underline;}
   .form-note{margin:12px 0 0;font-size:.85rem;min-height:1.2em;}
   .form-note.ok{color:#9ae6b4;}
   .form-note.err{color:#feb2b2;}
@@ -1105,12 +1108,14 @@
             <label for="qf-message" id="qf-message-label" data-editable="text">¿Qué necesitas pintar?</label>
             <textarea id="qf-message" name="Mensaje" rows="3" required="" placeholder="Ej: el salón, unos 20 m². Si ya tienes una idea de color, cuéntanosla."></textarea>
           </div>
+          <div class="form-row form-check">
+            <label for="qf-terms-check">
+              <input type="checkbox" id="qf-terms-check" required>
+              <span><span id="qf-terms-note" data-editable="text">He leído y acepto los</span> <a href="#" id="termsModalOpen" data-editable="text">términos y condiciones de la visita</a>.</span>
+            </label>
+          </div>
           <button type="submit" class="btn btn-primary" id="qf-submit" style="width:100%;">Solicitar presupuesto</button>
           <p class="form-note" id="qf-status" role="status"></p>
-          <p style="margin-top:10px;font-size:.78rem;color:#a9bcd8;">
-            <span id="qf-terms-note" data-editable="text">Presupuesto sin compromiso.</span>
-            <a href="#" id="termsModalOpen" data-editable="text" style="color:#fff;text-decoration:underline;">Ver términos de la visita</a>
-          </p>
         </form>
       </div>
     </div>
@@ -1163,6 +1168,7 @@
     </button>
     <h3 id="terms-modal-title" data-editable="text">Términos y condiciones de la visita</h3>
     <p id="terms-modal-text" data-editable="text">La visita para la valoración de los trabajos y elaboración del presupuesto conlleva un coste de desplazamiento de 20 €, que no se cobrará en caso de aceptación del presupuesto y contratación del servicio. Si el presupuesto no es aceptado, se cobrará el importe indicado en concepto de desplazamiento.</p>
+    <button type="button" class="btn btn-primary" id="termsModalContinue" style="width:100%;display:none;" data-editable="text">Entendido, enviar solicitud</button>
   </div>
 </div>
 
@@ -1457,31 +1463,70 @@
 
   // quote request form: builds the message and hands it straight to
   // WhatsApp (wa.me) instead of email or a third-party form relay — no
-  // account, no server, nothing that can go down on our side. The visitor
-  // only has to tap Send once inside WhatsApp itself.
+  // account, no server, nothing that can go down on our side. Submitting
+  // doesn't send anything right away: it opens the terms modal (with its
+  // "Entendido, enviar solicitud" button shown) as a second confirmation of
+  // the 20€ displacement fee, and only that button actually opens
+  // WhatsApp. The checkbox's own "required" stops a first-time submit
+  // before any of this runs.
   (function(){
     var form = document.getElementById('quoteForm');
-    if (!form) return;
     var status = document.getElementById('qf-status');
+    var modal = document.getElementById('termsModal');
+    var openBtn = document.getElementById('termsModalOpen');
+    var closeBtn = document.getElementById('termsModalClose');
+    var continueBtn = document.getElementById('termsModalContinue');
+    var pendingUrl = null;
 
-    form.addEventListener('submit', function(e){
+    function showModal(withContinue){
+      if (!modal) return;
+      modal.classList.add('show');
+      modal.setAttribute('aria-hidden', 'false');
+      if (continueBtn) continueBtn.style.display = withContinue ? 'flex' : 'none';
+    }
+    function hideModal(){
+      if (!modal) return;
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+
+    if (openBtn) openBtn.addEventListener('click', function(e){
       e.preventDefault();
-      var phoneEl = document.getElementById('phone-text');
-      var digits = ((phoneEl && phoneEl.textContent) || '34645239750').replace(/\D/g, '');
-      if (digits.length === 9) digits = '34' + digits;
-
-      var nombre = document.getElementById('qf-name').value.trim();
-      var telefono = document.getElementById('qf-phone').value.trim();
-      var mensaje = document.getElementById('qf-message').value.trim();
-
-      var texto = 'Hola, me llamo ' + nombre + ' y quisiera solicitar un presupuesto de pintura' +
-        (mensaje ? ' para ' + mensaje : '') + '. Mi teléfono de contacto es ' + telefono + '.';
-
-      var url = 'https://wa.me/' + digits + '?text=' + encodeURIComponent(texto);
-      status.textContent = '¡Gracias! Te llevamos a WhatsApp para enviar tu solicitud — te responderemos a la mayor brevedad posible.';
-      status.className = 'form-note ok';
-      window.open(url, '_blank');
+      pendingUrl = null;
+      showModal(false);
     });
+    if (closeBtn) closeBtn.addEventListener('click', hideModal);
+    if (modal) modal.addEventListener('click', function(e){ if (e.target === modal) hideModal(); });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && modal && modal.classList.contains('show')) hideModal();
+    });
+    if (continueBtn) continueBtn.addEventListener('click', function(){
+      if (pendingUrl) window.open(pendingUrl, '_blank');
+      hideModal();
+      if (status) {
+        status.textContent = '¡Gracias! Te llevamos a WhatsApp para enviar tu solicitud — te responderemos a la mayor brevedad posible.';
+        status.className = 'form-note ok';
+      }
+    });
+
+    if (form) {
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        var phoneEl = document.getElementById('phone-text');
+        var digits = ((phoneEl && phoneEl.textContent) || '34645239750').replace(/\D/g, '');
+        if (digits.length === 9) digits = '34' + digits;
+
+        var nombre = document.getElementById('qf-name').value.trim();
+        var telefono = document.getElementById('qf-phone').value.trim();
+        var mensaje = document.getElementById('qf-message').value.trim();
+
+        var texto = 'Hola, me llamo ' + nombre + ' y quisiera solicitar un presupuesto de pintura' +
+          (mensaje ? ' para ' + mensaje : '') + '. Mi teléfono de contacto es ' + telefono + '.';
+
+        pendingUrl = 'https://wa.me/' + digits + '?text=' + encodeURIComponent(texto);
+        showModal(true);
+      });
+    }
   })();
 
   // "leave a review" stays on the page — it goes to the owner's inbox
@@ -1537,23 +1582,6 @@
     });
   })();
 
-  // terms modal: the displacement-fee notice reuses the same lightbox
-  // styling as the (currently dormant) "combinaciones" feature, so it opens
-  // for every visitor regardless of edit mode.
-  (function(){
-    var openBtn = document.getElementById('termsModalOpen');
-    var modal = document.getElementById('termsModal');
-    var closeBtn = document.getElementById('termsModalClose');
-    if (!openBtn || !modal) return;
-    function openModal(e){ if (e) e.preventDefault(); modal.classList.add('show'); modal.setAttribute('aria-hidden', 'false'); }
-    function closeModal(){ modal.classList.remove('show'); modal.setAttribute('aria-hidden', 'true'); }
-    openBtn.addEventListener('click', openModal);
-    if (closeBtn) closeBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', function(e){ if (e.target === modal) closeModal(); });
-    document.addEventListener('keydown', function(e){
-      if (e.key === 'Escape' && modal.classList.contains('show')) closeModal();
-    });
-  })();
 
   // in-page edit mode: lets an owner/editor change text and swap photos
   // without going through Claude. Hidden entirely for anyone else.
