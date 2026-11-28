@@ -541,8 +541,8 @@
   .cta-block textarea{resize:vertical;min-height:70px;}
   .cta-block input::placeholder, .cta-block textarea::placeholder{color:#8fa6c9;}
   .cta-block input:focus, .cta-block textarea:focus{outline:2px solid var(--amber);outline-offset:1px;}
-  .form-check label{display:flex;gap:10px;align-items:flex-start;font-size:.82rem;font-weight:400;color:#cfe0f7;margin-bottom:0;cursor:pointer;}
-  .form-check input[type="checkbox"]{margin-top:3px;flex:none;width:16px;height:16px;accent-color:var(--amber);cursor:pointer;}
+  .form-check label{display:flex;gap:10px;align-items:flex-start;font-size:.82rem;font-weight:400;color:#cfe0f7;margin-bottom:0;cursor:pointer;line-height:1.5;}
+  .form-check input[type="checkbox"]{margin-top:2px;flex:none;width:17px;height:17px;accent-color:var(--amber);cursor:pointer;}
   .form-check a{color:#fff;text-decoration:underline;}
   .form-note{margin:12px 0 0;font-size:.85rem;min-height:1.2em;}
   .form-note.ok{color:#9ae6b4;}
@@ -1569,7 +1569,7 @@
         return res.json();
       }).then(function(){
         form.reset();
-        status.textContent = '¡Gracias! Vamos a revisarla antes de publicarla.';
+        status.textContent = '¡Gracias por tu opinión!';
         status.className = 'form-note ok';
       }).catch(function(){
         clearTimeout(timer);
